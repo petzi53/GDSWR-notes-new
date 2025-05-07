@@ -1,0 +1,25 @@
+# empty: Dates {#sec-04}
+
+
+::::: {#obj-chap04}
+:::: {.my-objectives}
+::: {.my-objectives-header}
+Dates in R
+:::
+
+::: {.my-objectives-container}
+
+- Converting Characters to Dates
+- Other {**lubridate**} Operators and Functions
+- Practice
+
+
+:::
+::::
+:::::
+
+
+
+::: {.callout-note style="color: blue;"}
+Since I already know quite a bit about this topic, I skipped it. Therefore, this chapter does not include personal notes.
+:::

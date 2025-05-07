@@ -1,0 +1,360 @@
+---
+knitr: 
+    opts_chunk: 
+      code-fold: show
+      results: hold
+  
+---
+# Raster: Continuous {#sec-06}
+
+
+```{r}
+#| label: setup
+#| results: hold
+#| include: false
+
+base::source(file = "R/helper.R")
+ggplot2::theme_set(ggplot2::theme_bw())
+
+```
+
+## Table of content for chapter 04 {.unnumbered}
+
+::::: {#obj-chap03}
+:::: {.my-objectives}
+::: {.my-objectives-header}
+Chapter section list
+:::
+
+::: {.my-objectives-container}
+
+
+
+:::
+::::
+:::::
+
+## Importing Raster Data
+
+### General data information
+
+A raster object can be created by calling the `terra::rast()` function and specifying an external image file as an argument. … The resulting object belongs to the `SpatRaster` class. Invoking the `base::print()` function for a raster object provides information about the dimensions of the grid, cell size, geographic location, and other details.
+
+::: {.my-code-collection}
+:::: {.my-code-collection-header}
+::::: {.my-code-collection-icon}
+:::::
+:::::: {#exm-06-get-general-data-information}
+: Get general sparial raster data information
+::::::
+
+::::
+
+::::{.my-code-collection-container}
+
+::: {.panel-tabset}
+
+###### rast()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-lst-example}
+: Loading Land Survey Temperature (LST) Data
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: lst-example
+
+lst <- terra::rast("data/Chapter6/MOD11A2_2017-07-12.LST_Day_1km.tif")
+base::cat("*********** class of data *************\n")
+class(lst)
+base::cat("\n**************** metadata *****************\n")
+lst
+
+```
+
+***
+
+**From the help file:**
+
+`terra::rast()` is the method to create `SpatRaster` objects. These objects can be created from scratch, from a filename, or from another object.
+
+A `SpatRaster` represents a spatially referenced surface divided into three dimensional cells (rows, columns, and layers).
+
+When a `SpatRaster` is created from one or more files, it does not load the cell (pixel) values into memory (RAM). It only reads the parameters that describe the geometry of the `SpatRaster`, such as the number of rows and columns and the coordinate reference system. The actual values will be read when needed.
+
+
+::::
+:::::
+
+
+
+###### summary()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-summary-of-raster-data}
+: Summary of Raster Data
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: summary-of-raster-data
+
+terra::summary(lst, size = 1e6)
+```
+
+***
+
+The `terra::summary()` function provides information about the statistical distribution of raster values, with the `size` argument specifying the number of randomly sampled pixels to include in the summary.
+
+::::
+:::::
+
+###### helpers
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-helpers-function}
+: Helpers function to extract specific characteristics of a SpatRaster objects
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: helpers-function
+
+base::cat("### Number of grid cells ###\n")
+terra::ncell(lst)
+base::cat("\n### Number of grid rows ###\n")
+terra::nrow(lst)
+base::cat("\n### Number of grid columns ###\n")
+terra::ncol(lst)
+base::cat("\n### Number of raster layers ###\n")
+terra::nlyr(lst)
+base::cat("\n###### Grid cell size ######\n")
+terra::res(lst)
+```
+
+
+
+::::
+:::::
+
+###### ext()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-raster-extent}
+: Return geographic coordinates of the raster extent
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: raster-extend
+
+lst_ext <- terra::ext(lst)
+
+base::cat("###### Data class ######\n")
+base::class(lst_ext)
+
+base::cat("\n############ Raster coordinates ############\n")
+lst_ext[1:4]
+
+```
+
+***
+
+The `terra::ext()` function returns a `SpatExtent` object that contains the geographic coordinates of the raster extent. `SpatExtent` objects can be used to specify the extent of new raster objects or to crop rasters to a new extent.
+
+::::
+:::::
+
+###### crs()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-get-crs}
+: Get the coordinate reference system (CRS)
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: get-crs
+
+base::cat("###### Return details about the coordinate reference system ######\n")
+terra::crs(lst, parse = TRUE)
+
+base::cat("\n########## Return an abbreviated summary ##########\n")
+terra::crs(lst, describe = TRUE)
+```
+
+The `terra::crs()` function returns a character string containing details about the coordinate reference system (`r glossary("CRS")`) of the raster dataset. By default, the output is in well-known text (`r glossary("WKT")`) format. The `parse = TRUE` argument parses the output into a vector that is easier to read when printed to the R console.
+
+::::
+:::::
+
+###### names()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-get-set-layer-names}
+: Get and set layer names
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: get-set-layer-names
+
+base::cat("###### get original layer name ######\n")
+terra::names(lst)
+
+base::cat("\n###### get changed layer name ######\n")
+names(lst) <- c("temperature")
+terra::names(lst)
+
+```
+
+::::
+:::::
+
+
+:::
+
+::::
+:::::
+
+### Modifying raster data objects
+
+`SpatRaster` objects can be modified with various functions and used as input to mathematical expressions. 
+
+In the LST dataset, missing data are coded as zeroes, and the raw digital numbers must be modified by a scaling factor of 0.02 to convert them into degrees Kelvin. The code below uses the `terra::ifel()` function, which is analogous to the` base::ifelse()` function, to replace zero values in the LST dataset with `NA` values. 
+
+The next expression applies the scaling factor to obtain degrees Kelvin and subtracts a constant to further convert the temperatures from Kelvin to Celsius. In both cases, the calculations are automatically carried out for every grid cell in the raster dataset.
+
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-modifying-raster-data}
+: Modiyfing raster data objects
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: modifying-raster-data
+
+lst <- terra::ifel(lst == 0, NA, lst)
+lst_c <- lst * 0.02 - 273.15
+terra::summary(lst_c, size = 1e6)
+```
+
+::::
+:::::
+
+### Statistical summaries
+
+The `terra::global()` function can be used to generate statistical summaries of the pixels in a raster dataset. 
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-statistical-summaries}
+: Generate statistical saummaries with `terra::global()`
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: statistical-summaries
+
+terra::global(lst_c, fun = "mean", na.rm=T)
+##                 mean
+## temperature 30.28687
+terra::global(lst_c, fun = "min", na.rm=T)
+##              min
+## temperature 1.67
+terra::global(lst_c, fun = "max", na.rm=T)
+##               max
+## temperature 54.77
+terra::global(lst_c, fun = "sd", na.rm=T)
+##                   sd
+## temperature 3.652403
+```
+
+::::
+:::::
+
+### Exporting raster objects
+
+Raster objects can be exported using the `terra::writeRaster()` function. The format of the exported image is specified using the format argument. Common output formats are:
+
+- GTiff (GeoTiff), 
+- ascii (ESRI ASCII text ), 
+- CDF, (NetCDF), see also `terra::writeCDF()` and 
+- HFA (ERDAS Imagine). 
+
+The `overwrite = TRUE` argument will replace existing files with the same name.
+
+::: {.my-code-collection}
+:::: {.my-code-collection-header}
+::::: {.my-code-collection-icon}
+:::::
+:::::: {#exm-06-export-raster-objects}
+: Exporting Raster Objects
+::::::
+
+::::
+
+::::{.my-code-collection-container}
+
+::: {.panel-tabset}
+
+###### writeRaster()
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-writeRaster-example}
+: Exporting raster objects with `terra::writeRaster()`
+::::::
+:::
+::::{.my-r-code-container}
+<center>**Run this code chunk manually if the file still needs to be downloaded.**</center>
+
+```{r}
+#| label: writeRaster-example
+#| eval: false
+
+terra::writeRaster(lst_c, 
+            filename = "data/Chapter6/MOD11A2_2017-07-12.LST_Day_1km_DegC.tif", 
+            filetype = "GTiff", overwrite = TRUE )
+```
+
+
+::::
+:::::
+
+
+###### drivers
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-06-get-gdal-drivers}
+: Get available drivers for your system and gdal version
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: get-gdal-drivers
+
+terra::gdal(drivers = TRUE)
+```
+
+
+
+::::
+:::::
+
+:::
+
+::::
+:::::
+
+***

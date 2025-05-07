@@ -413,6 +413,13 @@ iframe {
   border-bottom-right-radius: 10px;
 }
 
+/*
+################################################
+### Special box for package description in annex
+### Reference the section '@sec-<package-name>'
+################################################
+*/
+
 .my-num-packagebox {
   margin: 1em 0;
   border: 2px solid #8B668B;

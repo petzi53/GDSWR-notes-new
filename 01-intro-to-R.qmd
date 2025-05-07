@@ -1,0 +1,33 @@
+# empty: Introduction to R {#sec-01}
+
+::::: {#obj-chap01}
+:::: {.my-objectives}
+::: {.my-objectives-header}
+
+Introduction to the R programming language
+
+:::
+
+::: {.my-objectives-container}
+
+- Basic calculations
+- R Objects
+    - Vectors
+    - Matrices and lists
+    - Data frames
+- R Functions
+    - Data input and graphics
+    - Statistical analysis
+- Tips for Programming with R
+- Practice
+
+
+
+:::
+::::
+:::::
+
+
+::: {.callout-note style="color: blue;"}
+Since I already know quite a bit about this topic, I skipped it. Therefore, this chapter does not include personal notes.
+:::

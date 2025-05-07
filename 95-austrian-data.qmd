@@ -1,0 +1,103 @@
+# Working with Austrian data {#sec-annex-c}
+
+
+```{r}
+#| label: setup
+#| results: hold
+#| include: false
+
+base::source(file = "R/helper.R")
+ggplot2::theme_set(ggplot2::theme_bw())
+options(show.signif.stars = FALSE)
+
+```
+
+## Table of content for chapter 04 {.unnumbered}
+
+::::: {#obj-chap03}
+:::: {.my-objectives}
+::: {.my-objectives-header}
+Chapter section list
+:::
+
+::: {.my-objectives-container}
+
+
+
+:::
+::::
+:::::
+
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-ID-text}
+: Numbered R Code Title
+::::::
+:::
+::::{.my-r-code-container}
+::: {#lst-chaplisting-ID}
+```{r}
+#| label: code-chunk-name
+
+at_regions <- sf::st_read("_archive/austria/austria-with-regions_.geojson")
+```
+
+Listing title
+:::
+
+::::
+:::::
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-ID-text}
+: Numbered R Code Title
+::::::
+:::
+::::{.my-r-code-container}
+::: {#lst-chaplisting-ID}
+```{r}
+#| label: code-chunk-name2
+
+ggplot2::ggplot(data = at_regions) +  
+  ggplot2::geom_sf(fill = NA)
+```
+
+Listing title
+:::
+
+::::
+:::::
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-ID-text}
+: Numbered R Code Title
+::::::
+:::
+::::{.my-r-code-container}
+::: {#lst-chaplisting-ID}
+```{r}
+#| label: code-chunk-name3
+#| cache: TRUE
+
+at_folder = "_archive/austria"
+pol_bez_folder = "/OGDEXT_POLBEZ_1_STATISTIK_AUSTRIA_20240101/"
+pol_bez_file = "STATISTIK_AUSTRIA_POLBEZ_20240101.shp"
+
+at_pol_bezirk <- sf::st_read(
+  paste0(at_folder, pol_bez_folder, pol_bez_file)
+)
+
+ggplot2::ggplot(data = at_pol_bezirk) +  
+  ggplot2::geom_sf(fill = NA)
+```
+
+Listing title
+:::
+
+::::
+:::::
+
+

@@ -1,0 +1,15 @@
+{
+  "hash": "7e54cb1d65603c6c7cdf9a351a989128",
+  "result": {
+    "engine": "knitr",
+    "markdown": "# Working with Austrian data {#sec-annex-c}\n\n\n\n\n## Table of content for chapter 04 {.unnumbered}\n\n::::: {#obj-chap03}\n:::: {.my-objectives}\n::: {.my-objectives-header}\nChapter section list\n:::\n\n::: {.my-objectives-container}\n\n\n\n:::\n::::\n:::::\n\n\n:::::{.my-r-code}\n:::{.my-r-code-header}\n:::::: {#cnj-ID-text}\n: Numbered R Code Title\n::::::\n:::\n::::{.my-r-code-container}\n::: {#lst-chaplisting-ID}\n\n::: {.cell}\n\n```{.r .cell-code}\nat_regions <- sf::st_read(\"_archive/austria/austria-with-regions_.geojson\")\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n#> Reading layer `austria-with-regions_' from data source \n#>   `/Users/petzi/Documents/Meine-Repos/GDSWR-notes3/_archive/austria/austria-with-regions_.geojson' \n#>   using driver `GeoJSON'\n#> Simple feature collection with 9 features and 4 fields\n#> Geometry type: MULTIPOLYGON\n#> Dimension:     XY\n#> Bounding box:  xmin: 9.53099 ymin: 46.37265 xmax: 17.16204 ymax: 49.02135\n#> Geodetic CRS:  WGS 84\n```\n\n\n:::\n:::\n\n\nListing title\n:::\n\n::::\n:::::\n\n:::::{.my-r-code}\n:::{.my-r-code-header}\n:::::: {#cnj-ID-text}\n: Numbered R Code Title\n::::::\n:::\n::::{.my-r-code-container}\n::: {#lst-chaplisting-ID}\n\n::: {.cell}\n\n```{.r .cell-code}\nggplot2::ggplot(data = at_regions) +  \n  ggplot2::geom_sf(fill = NA)\n```\n\n::: {.cell-output-display}\n![](95-austrian-data_files/figure-html/code-chunk-name2-1.png){width=672}\n:::\n:::\n\n\nListing title\n:::\n\n::::\n:::::\n\n:::::{.my-r-code}\n:::{.my-r-code-header}\n:::::: {#cnj-ID-text}\n: Numbered R Code Title\n::::::\n:::\n::::{.my-r-code-container}\n::: {#lst-chaplisting-ID}\n\n::: {.cell}\n\n```{.r .cell-code}\nat_folder = \"_archive/austria\"\npol_bez_folder = \"/OGDEXT_POLBEZ_1_STATISTIK_AUSTRIA_20240101/\"\npol_bez_file = \"STATISTIK_AUSTRIA_POLBEZ_20240101.shp\"\n\nat_pol_bezirk <- sf::st_read(\n  paste0(at_folder, pol_bez_folder, pol_bez_file)\n)\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n#> Reading layer `STATISTIK_AUSTRIA_POLBEZ_20240101' from data source \n#>   `/Users/petzi/Documents/Meine-Repos/GDSWR-notes3/_archive/austria/OGDEXT_POLBEZ_1_STATISTIK_AUSTRIA_20240101/STATISTIK_AUSTRIA_POLBEZ_20240101.shp' \n#>   using driver `ESRI Shapefile'\n#> Simple feature collection with 117 features and 2 fields\n#> Geometry type: MULTIPOLYGON\n#> Dimension:     XY\n#> Bounding box:  xmin: 112518.2 ymin: 275472 xmax: 685444.5 ymax: 570431.1\n#> Projected CRS: MGI / Austria Lambert\n```\n\n\n:::\n\n```{.r .cell-code}\nggplot2::ggplot(data = at_pol_bezirk) +  \n  ggplot2::geom_sf(fill = NA)\n```\n\n::: {.cell-output-display}\n![](95-austrian-data_files/figure-html/code-chunk-name3-1.png){width=672}\n:::\n:::\n\n\nListing title\n:::\n\n::::\n:::::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

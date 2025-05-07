@@ -3,6 +3,8 @@
 # Author: Peter Baumgartner
 # Edit date: May 19, 2024
 # CONTENT:
+## - load {glossary} and provide path to my glossary.yml
+## - my_create_folder: create folder if not exists already
 ## - my_glance_data: glance at a specified number of random data
 ## - my_qq_plot: create histogram with overlaid dnorm curve
 ## - my_scatter: create scatterplot with lm and loess curve
@@ -12,11 +14,46 @@
 ## - t_col: transparent colors
 ##########################################################
 
-
-
 library(glossary)
 
 glossary::glossary_path("../glossary-pb/glossary.yml")
+
+################################################################
+# my_create_folder:
+# Purpose:
+# check if folder already exists at parameter "path"
+# if not, then create folder
+# Author: Peter Baumgartner
+# path = character string:
+#                example: "/Users/xxyyzz/Documents/my-data/"
+################################################################
+my_create_folder <- function(path){
+
+  if (!base::file.exists(path))
+  {base::dir.create(path)}
+}
+
+################################################################
+# get_skimmers.sfc:
+# Purpose:
+# provide skimmers for special column `geometry`
+# of `sfc` data type for geospatial data in {sf}
+# General procedure:
+#   https://docs.ropensci.org/skimr/articles/extending_skimr.html#defining-sfls-for-a-package
+# Specifics the simple feature list column (sfc) in the {sf} package
+#   https://github.com/ropensci/skimr/issues/88
+################################################################
+
+get_skimmers.sfc <- function(column) {
+  skimr::sfl(
+    skim_type = "sfc",
+    missing = skimr::n_missing,
+    complete = skimr::n_complete,
+    n = length,
+    n_unique = purrr::compose(length, skimr::n_unique),
+    valid = purrr::compose(sum, sf::st_is_valid)
+  )
+}
 
 
 ##########################################################
@@ -289,20 +326,6 @@ list_plotter <- function(color_list, names, package_name) {
     }
 }
 
-################################################################
-# pb_create_folder:
-# Purpose:
-# check if folder already exists at parameter "path"
-# if not, then create folder
-# Author: Peter Baumgartner
-# path = character string:
-#                example: "/Users/xxyyzz/Documents/my-data/"
-################################################################
-pb_create_folder <- function(path){
-
-  if (!base::file.exists(path))
-    {base::dir.create(path)}
-}
 
 
 ################################################################
@@ -318,7 +341,7 @@ pb_create_folder <- function(path){
 # # See: https://bookdown.org/pbaumgartner/swr-harris/
 ################################################################
 
-pb_save_data_file <- function(chapter_folder, object, file_name){
+my_save_data_file <- function(chapter_folder, object, file_name){
     data_folder <- base::paste0(here::here(), "/data/")
     if (!base::file.exists(data_folder))
     {base::dir.create(data_folder)}
@@ -337,7 +360,7 @@ pb_save_data_file <- function(chapter_folder, object, file_name){
 
 
 ################################################################
-# pkgs_downloads: Get number of downloads from RStudio CRAN Mirror
+# pkgs_dl: Get number of downloads from RStudio CRAN Mirror
 # Purpose:
 # Compare popularity of different packages
 # Author: Peter Baumgartner
@@ -348,7 +371,7 @@ pb_save_data_file <- function(chapter_folder, object, file_name){
 # I have used the function in my notes on "Statistics with R"
 # # See: https://bookdown.org/pbaumgartner/swr-harris/
 ################################################################
-pkgs_dl <-  function(pkgs, period = "last-week", days = 7) {
+my_pkgs_dl <-  function(pkgs, period = "last-week", days = 7) {
     dl_pkgs <- cranlogs::cran_downloads(when = period, packages = pkgs)
 
     start_date = base::min(dl_pkgs$date)

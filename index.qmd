@@ -1,60 +1,89 @@
 # Preface {.unnumbered}
 
 ::: {.callout-note style="color: blue;"}
-#### This is work in progress
-
-XXX: I have finished XXX%. Currently I am working on Chapter XXX.
-
+##### This is work in progress: Finished about 11%
 :::
 
-::: my-watch-out
-::: my-watch-out-header
-WATCH OUT: This is my personal learning material and is therefore
-neither an accurate replication nor an authoritative textbook.
+This Quarto book collects my personal notes, trials and exercises of  Geographic Data Science With R: Visualizing and Analyzing Environmental Change by Michael Wimberly [@wimberly-2023]. The book is also [available online](https://bookdown.org/mcwimberly/gdswr-book/).
+
+I have some experience with the R language but none working with geodata. I want to use maps to show how statistical results differ by country. My focus is therefore on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. I have added some additional material/experiments as separate annex chapters.
+
+The book has twelve chapters with 267 pages (appendix and bibliography *not* included.) I skipped Chapter 1 to 4 (83 pages) because I am already familiar with their topics. The percentage is therefore calculated by notes referring to the chapters 5 to 12 (184 pages).
+
+::: {.my-resource}
+::: {.my-resource-header}
+:::::: {#lem-index-book-resources}
+: Resources used for Geographic Datascience with R (GDSWR)
+::::::
 :::
 
-::: my-watch-out-container
+::: {.my-resource-container}
+- Wimberly, M. C. (2023). [Geographic Data Science With R](https://www.amazon.com/-/de/dp/1032347716/): Visualizing and Analyzing Environmental Change (1st ed.). Chapman & Hall/CRC.
+- Wimberly, M. C. (2023). Geographic Data Science with R: Visualizing and Analyzing Environmental Change. [https://bookdown.org/mcwimberly/gdswr-book/](https://bookdown.org/mcwimberly/gdswr-book)
+- Wimberly, M. C. (2022). Geographic Data Science with R [Dataset]. figshare. [https://doi.org/10.6084/m9.figshare.21301212.v3](https://doi.org/10.6084/m9.figshare.21301212.v3)
+- Dyba, K. (2024, June 26). How to load and save vector data in R. R-Spatial. [https://r-spatial.org/r/2024/06/26/sf-load-save.html](https://doi.org/10.6084/m9.figshare.21301212.v3) (additionally used for chapter 5)
+
+:::
+:::
+
+
+## Packages used in this chapter
+
+:::::{.my-resource}
+:::{.my-resource-header}
+:::::: {#lem-resource-text}
+: List of packages to install
+::::::
+:::
+::::{.my-resource-container}
+
+- {**glossary**}: [@glossary]
+
+::::
+:::::
+
+
+
+## Personal learning material
+
 I am writing this book as a text for others to read because that forces me to
 become explicit and explain all my learning outcomes more carefully.
 Please keep in mind that this text is not written by an expert but by a
 learner.
 
-Text passages with content I am already familiar I have skipped. Section
-of the original text where I needed more in-depth knowledge I have
+Text passages with content I am already familiar I have skipped. In this case I have started with chapter 5 because the chapters 1 to 4 is an introduction into using R which I am already comfortable with. 
+
+Section of the original text where I needed more in-depth knowledge I have
 elaborated and added my own comments resulted from my personal research.
 
-Be warned! In spite of replicating most of the content this Quarto book
+::: {.callout-warning}
+###### All mistakes are my own responsibility
+
+This is my personal learning material and is therefore
+neither an accurate replication nor an authoritative textbook.
+
+In spite of replicating most of the content this Quarto book
 may contain many mistakes. All the misapprehensions and errors are of
 course my own responsibility.
 :::
-:::
-
-## Content and Goals of this Book {.unnumbered}
-
-This Quarto book collects my personal notes, trials and exercises of
-XXX[BOOK NAME](URL) by XXX: NAME OF AUTHOR [CITATION].
-
-XXX: DESCRIPTION OF THE BOOK AND WHY IT IS WORTH FOR A QUARTO BOOK
 
 
+## Glossary
 
-## Text passages
-
-### Quotes and personal comments
-
-My text consists mostly of quotes from the XXX[BOOK NAME]. Sometimes I have them changed slightly to adpat it to the flow onf my notes. But I have not referenced the poistion of the (semi)quotes in the book. As I am generally follow the book's outline using the same text for headers, it should be clear where to find the quotes. 
-
-This means that most of the text in this Quarto book is not mine but comes
-from different resources. 
-
-My personal comments should be clear because most of the times it is a reflection about the book and my experiences with it.
-
-
-
-### Glossary
+::: {layout="[10, 30]" layout-valign="center"}
+![](https://debruine.github.io/glossary/logo.png)
 
 I am using the {**glossary**} package to create links to glossary
-entries.\]
+entries. If you hover with your mouse over the double underlined links it opens
+an window with the appropriate glossary text. Try this example: `r glossary("geoJSON")`. Additionally you will find a table of all used glossary entries in a specific chapter at the end of the chapter, immediately in front of the session-info.
+
+:::
+
+I have added many of the glossary entries when I was working through
+other books either taking the text passage of these books I was reading
+or via an internet recherche from other resources. I have added the
+source of glossary entry. Sometimes I have used abbreviation, but I need
+still to provide a key what this short references mean.
 
 ::: my-r-code
 ::: my-r-code-header
@@ -96,42 +125,104 @@ glossary::glossary_path("../glossary-pb/glossary.yml")
 :::
 :::
 
-If you hover with your mouse over the double underlined links it opens
-an window with the appropriate glossary text. Try this example: `r glossary("Z-Score")`.
 
-::: my-watch-out
-::: my-watch-out-header
-WATCH OUT! Glossary is my private learning vehicle
-:::
 
-::: my-watch-out-container
-::: {layout="[10, 30]" layout-valign="center"}
-![](https://debruine.github.io/glossary/logo.png)
 
-I have added many of the glossary entries when I was working through
-other books either taking the text passage of these books I was reading
-or via an internet recherche from other resources. Sometimes I have added the
-source of the glossary entry as an abbreviation or as an URL. Many definitions were provided by the KI provided within the search of my [Brave browser](https://brave.com/).
-:::
-
-:::
-:::
-
-If you fork the XXX: [REPO OF THIS BOOK(URL OF THIS BOOK] then the glossary will not
+If you fork the repository of my [Geographic Datascience with R] (https://github.com/petzi53/GDSWR), the glossary will not
 work out of the box. Load down the `glossary.yml` file from [my
 glossary-pb GitHub
 repo](https://github.com/petzi53/glossary-pb/blob/master/glossary.yml),
 store it on your hard disk and change the path in the code chunk
-@lst-preface-load-glossary accordingly.
+@lst-preface-load-glossary.
 
-In any case I am the only responsible person for the glossary text, especially
-if I have used text from other resources wrongly. Again: The main purpose of the glossary is to support my persponal learning venture.
+::: {.callout-warning}
+###### Glossary is my private learning vehicle
+
+What I have said to my personal notes in general is also valid for the glossary. The entries represent the state of my personal knowledge and are neither authoritative nor complete. 
+:::
+
 
 ## R Code and Datasets
 
-During coding I am following the [Tidyverse Style Guide](https://style.tidyverse.org/). But for learning purposes I am trying to prefix all functions with the package name in the format <package>::<function> (e.g., `dplyr::filter()`) This is an overhead but supports me to understand which packages is responsible for which action.
+### Download datasets
 
-Sometimes adding just the package name does not work. This is mostly the case when a generic function name like `plot` is used by another package in a more specialized manner. In this case I will try to use the function of the package. If this doesn't work too then I have to come back to the standard usage of `base::library(<package-name>)`.
+The data files used in each chapter has to be downloaded from [https://doi.org/10.6084/m9.figshare.21301212](https://doi.org/10.6084/m9.figshare.21301212). 
+
+Run the following code chunk only once (manually).
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-00-download-data-files}
+: Download Data Files
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: download-data-files
+#| results: hold
+#| code-fold: show
+#| eval: false
+
+base::source(file = "R/helper.R")
+
+## create data folder (only once, e.g., only in this chapter)
+baseURL <- here::here()
+my_create_folder(base::paste0(baseURL, "/data"))
+
+url = "https://figshare.com/ndownloader/files/39733921"
+utils::download.file(url, base::paste0(baseURL, "/data/gdswr_data.zip"))
+utils::unzip(base::paste0(baseURL, "/data/gdswr_data.zip"), 
+             exdir = base::paste0(baseURL, "/data"))
+
+## delete .zip file
+fn <- (base::paste0(baseURL, "/data/gdswr_data.zip"))
+if (file.exists(fn)) {
+  file.remove(fn)
+}
+```
+
+<center>(*For this R code chunk is no output available*)</center>
+
+::::
+:::::
+
+::: {.callout-warning}
+###### One data file exceeds GitHub's file size
+
+After I tried to commit my changes, I learned that there is a file `mesodata_large.csv`  in "data/Chapter3" with 151.28 MB. This exceeds GitHub's file size limit of 100.00 MB and can't, therefore, be stored on GitHub the standard way.   
+
+There is the possibility to use Git Large File Storage - [https://git-lfs.github.com](https://git-lfs.github.com). However, I decided against this complexity. Actually, I did not need the files of `Chapter1` to `Chapter4` as I skipped the starting chapters. But instead to delete the file from my data subfolder, I changed the content of `.gitignore` accordingly so that this large file will not be transferred to GitHub.       
+
+:::
+
+
+
+### Style guides
+
+Generally I am using the [Tidyverse Style
+Guide](https://style.tidyverse.org/) for code chunks. I am going to use underscore (`_`)
+or [snake case](https://en.wikipedia.org/wiki/Snake_case) to replace
+spaces as studies has shown that it is easier to read [@sharif2010].
+
+Additionally I will use some [Google style modifications](https://google.github.io/styleguide/Rguide.html) from the tidyverse style
+guide:
+
+-   Start the names of private functions with `my_` (not with a dot, as recommended in the Google style guide).
+-   Don't use `base::attach()`.
+-   No right-hand assignments.
+-   Use explicit returns.
+-   Qualify namespace.
+
+### Qualifying namespace
+
+Especially the last point (qualifying namespace) is important for my
+learning. Besides preventing conflicts with functions of identical names
+from different packages it helps to learn (or remember) which function
+belongs to which package. I think this justifies the small overhead and
+helps to make R code chunks self-sufficient. (No previous package
+loading, or library calls in the setup chunk.) To foster learning the
+relation between function and package I embrace the package name with
+curly brakes and format it in bold.
 
 I am using the package name also for the default installation of base R.
 This wouldn't be necessary but it helps me to understand where the base
@@ -148,10 +239,6 @@ default:
 -   {**stats**}: The R Stats Package
 -   {**utils**}: The R Utils Package
 
-I am not using always the exact code snippets for my replications
-because I am not only replicating the code to see how it works but also
-to change the values of parameters to observe their influences.
-
 When it is clear then I will follow the advice from Hadley Wickham:
 
 > When you call a function, you typically omit the names of data
@@ -159,65 +246,84 @@ When it is clear then I will follow the advice from Hadley Wickham:
 > default value of an argument, use the full name ([tidyverse style
 > guide](https://style.tidyverse.org/syntax.html)).
 
-## Annex
+### Native pipe
 
-In some of my book notes I provide files in the annex. They contain experiments not directly in line with the book but inspired by my reading of the book. 
 
-Often you will also find an annex file with a standardized short description of all my used packages, sometimes added with notes about my personal experiences with this package. An example of the standardized format gives you the following @sec-glossary-package.
+I am using the native pipe provided with R 4.1.0. It is important to know that there exist small but significant differences using the native pipe instead of the {**magrittr**} pipe. On of the consequences is that sometimes the code provided from the book with the {**magrittr**} pipe does not work with the native pipe. 
 
-### Glossary package {#sec-glossary-package}
-:::::: my-num-packagebox
-::: my-num-packagebox-header
-Package Profile: glossary
+This does not pose a general problem because you can mix both pipes. But where ever possible I have tried to stay with the native pipe.
+
+The differences between native and {**magrittr**} pipe are complex and I will not go into the details here. But the following reading list provides you wit material to study the discrepancies.
+
+
+:::::{.my-resource}
+:::{.my-resource-header}
+Differences between native pipe versus {**magrittr**} pipe
 :::
-
-:::: my-num-packagebox-container
-<center>{**glossary**}: [Glossaries for Markdown and Quarto Documents](https://debruine.github.io/glossary/) [@glossary]</center>
-
-------------------------------------------------------------------------
-
-::: {layout="[10, 30]" layout-valign="center"}
-![](img/logoi/logo-glossary-min.png){width="176"}
-
-Add glossaries to markdown and quarto documents by tagging individual words. Definitions can be provided inline or in a separate file. <br/></br>   
-There is a lot of necessary jargon to learn reading new books. The goal of {**glossary**} is to provide a lightweight solution for making glossaries in educational materials written in quarto or R Markdown. This package provides functions to link terms in text to their definitions in an external glossary file, as well as create a glossary table of all linked terms at the end of a section.
-:::
-
-------------------------------------------------------------------------
-
-In the meantime {**glossary**} is for me a very important learning vehicle. Whenever an expression appears with a doubled underlined link I know that I will get more information by hovering the mouse over the underlined text.
-
-There is a little inconvenience with abrreviation that could also be part of another glossary entry text string (e.g., `r glossary("APIx", "API")` and `r glossary("Capital Income")`). My workaround is to end the short abbreviation with an additional 'x' and then to call the glossary with the x-version follwed by the text that should be appear in the document (e.g., *r glossary("APIx", "API")*). This double format is a standard feature of the {**glossary**} package so that you can adapt the appearing text to the glossary entry (e.g., singular/plural or other grammar changes).
+::::{.my-resource-container}
 
 
+- Hadley Wickham in the [Tidyverse ](https://www.tidyverse.org/blog/2023/04/base-vs-magrittr-pipe/) ("Differences between the base R and magrittr pipes"), 
+- [Kathie Press](https://kpress.dev/blog/2022-06-19-replacing-the-magrittr-pipe-with-native-r-pipe/) ("Replacing the Magrittr Pipe With the Native R Pipe")
+- [Geek for Geeks](https://www.geeksforgeeks.org/what-are-the-differences-between-r-s-native-pipe-and-the-magrittr-pipe/) ("What are the differences between R's native pipe `|>` and the {**magrittr**} pipe `%>%`?")
+- [Isabella Velásquez](https://ivelasq.rbind.io/blog/understanding-the-r-pipe/) ("Understanding the native R pipe `|>`")
+- [StackOverflow](https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-native-pipe-and-the-magrittr-pipe) ("What are the differences between R's native pipe `|>` and the {**magrittr**} pipe `%>%`?")
+- [Yihui Xie](https://yihui.org/en/2022/04/magrittr-native-pipe/) ("Substitute the magrittr Pipe `%>%` with R’s Native Pipe Operator `|>`")
+- [R Bloggers](https://www.r-bloggers.com/2021/05/the-new-r-pipe/) (The new R pipe)
+- [Statistik Dresden](https://statistik-dresden.de/r-4-1-0-base-r-pipe/) ("R 4.1.0: Base R Pipe! `|>`") in German.
 ::::
-::::::
+:::::
 
 
+### Code linking
 
+Code linking does not work together with code annotation. I am therefore using standard comments for line numbering and explaining it in normal numbered lists after the code chunk. This is not optimal but for learning issues it is important to have link to the original documentations of the packages function.
 
-## Resources
+### Code snippets
 
-::: {.my-resource}
-::: {.my-resource-header}
+I am not using always the exact code snippets for my replications
+because I am not only replicating the code to see how it works but also
+to change the values of parameters to observe their influences.
+
+Function starting with `my_` are private function developed by me to facilitate repetitive tasks. To understand what these functions do, inspect the "R/helper.r" file.
+
+There is one exception to the `my_` convention: Geospatial data files are special and use a column type not covered with base R. To get data summaries using the `skimr::skim()` function I had to define a skim function list (`sfl`) specific for the `geometry` column.
+
+### Skimmers for the `sfc` data class
+
+For the {**sf**} data classes in the `geometry` column are no skimmers available. Possible data types are:
+
+ - sfc_POINT, 
+ - sfc_LINESTRING, 
+ - sfc_POLYGON, 
+ - sfc_MULTIPOINT, 
+ - sfc_MULTILINESTRING, 
+ - sfc_MULTIPOLYGON, and
+ - sfc_GEOMETRY.
+
+(`sfc` stands for "simple feature list column".)
+ 
+The `geometry` column is a combination of one of the above data types with the general `sfc` type. It is possible to adapt {**skimr**} for working with user defined data types using `skimr::skim_with()` or more generally with the `skimr::get_skimmers()` function to add default values for new data types to the standard `skimr::skim()` function. 
+
+I have applied with `skimr::get_skimmers.sfc()` a skim function list `sfl()` to get summary data for the `sfc` data type of the `geometry` column. You can inspect the details of this function in the already mentioned "R/helper.R" file.
+
+:::::{.my-resource}
+:::{.my-resource-header}
 :::::: {#lem-index-book-resources}
-: Resources used for this Quarto book
+: Defining `sfl` for `sfc` data types
 ::::::
 :::
+::::{.my-resource-container}
+Resources I have drawn upon to learn how to develop skimmers for the `geometry`column: 
 
-::: {.my-resource-container}
-
-XXX: [ADD HERE USED ADDITIONAL SOURCES]
-:::
-:::
-
+- [Defining sfl’s for a package](https://docs.ropensci.org/skimr/articles/extending_skimr.html#defining-sfls-for-a-package): General article that explains how to generate and use with user defined data types. `sfl`stands for "skimr function list". It is a list-like data structure used to define custom summary statistics for specific data types.
+- [skim of {**sf**} objects](https://github.com/ropensci/skimr/issues/88): Discussion specific to the data types in the {**sf**} package.
+::::
+:::::
 
 
-## Private Functions
 
-XXX: [DESCRIBE PRIVATE FUNCTION USED IN THIS BOOK]
-
-## Glossary Entries of this Chapter
+## Glossary
 
 ```{r}
 #| label: glossary-table

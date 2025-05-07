@@ -1,0 +1,144 @@
+stnm,stid,name,city,rang,cdir,cnty,lat,lon,elev,cdiv,clas
+110,ACME,Acme,Rush Springs,4,WNW,Grady,34.80833,-98.02325,397,Central,STANDARD
+1,ADAX,Ada,Ada,2,NNE,Pontotoc,34.79851,-96.66909,295,South Central,STANDARD
+2,ALTU,Altus,Altus,3,S,Jackson,34.58722,-99.33808,416,Southwest,STANDARD
+116,ALV2,Alva,Alva,7.2,SSW,Woods,36.70823,-98.70974,439,North Central,STANDARD
+3,ALVA,Alva,Alva,2,S,Woods,36.7797,-98.6717,450,North Central,STANDARD
+135,ANT2,Antlers,Antlers,3,WNW,Pushmataha,34.24967,-95.66844,172,Southeast,STANDARD
+4,ANTL,Antlers,Antlers,5,W,Pushmataha,34.22438,-95.70059,179,Southeast,STANDARD
+111,APAC,Apache,Apache,4,ENE,Caddo,34.91418,-98.29216,440,Southwest,STANDARD
+126,ARD2,Ardmore,Ardmore,3.5,ENE,Carter,34.19258,-97.08568,266,South Central,STANDARD
+5,ARDM,Ardmore,Ardmore,3,ENE,Carter,34.1922,-97.085,266,South Central,ENHANCED
+6,ARNE,Arnett,Arnett,8,WSW,Ellis,36.07204,-99.90308,719,Panhandle,STANDARD
+7,BBOW,Broken Bow,Broken Bow,7,E,McCurtain,34.0144,-94.6131,113,Southeast,STANDARD
+8,BEAV,Beaver,Beaver,1,SSW,Beaver,36.80253,-100.53012,758,Panhandle,CONTINUITY
+119,BEEX,Bee,Tishomingo,3.8,SE,Johnston,34.19121,-96.64386,196,South Central,STANDARD
+9,BESS,Bessie,Bessie,4,WNW,Washita,35.40185,-99.05847,511,West Central,STANDARD
+10,BIXB,Bixby,Bixby,2,NE,Tulsa,35.96305,-95.86621,184,Northeast,STANDARD
+11,BLAC,Blackwell,Blackwell,4,SSE,Kay,36.75443,-97.25452,304,North Central,STANDARD
+12,BOIS,Boise City,Boise City,3,SSE,Cimarron,36.69256,-102.49713,1267,Panhandle,STANDARD
+13,BOWL,Bowlegs,Bowlegs,3,NE,Seminole,35.17156,-96.63121,281,Central,STANDARD
+14,BREC,Breckinridge,Breckinridge,3,SE,Garfield,36.41201,-97.69394,352,North Central,STANDARD
+15,BRIS,Bristow,Bristow,4,SE,Creek,35.7805,-96.35404,239,Central,STANDARD
+124,BROK,Broken Bow,Broken Bow,6.5,E,McCurtain,34.0433,-94.6244,113,Southeast,STANDARD
+16,BUFF,Buffalo,Buffalo,0.5,SW,Harper,36.83129,-99.64101,559,Panhandle,STANDARD
+17,BURB,Burbank,Burbank,7,SW,Osage,36.63459,-96.81046,301,Northeast,STANDARD
+18,BURN,Burneyville,Burneyville,2,SE,Love,33.89376,-97.26918,228,South Central,STANDARD
+19,BUTL,Butler,Butler,5,SW,Custer,35.5915,-99.27059,520,West Central,STANDARD
+20,BYAR,Byars,Byars,3,ESE,Garvin,34.8497,-97.0033,345,South Central,STANDARD
+21,CALV,Calvin,Calvin,5,WNW,Hughes,34.9924,-96.33422,234,East Central,STANDARD
+22,CAMA,Camargo,Camargo,4,WNW,Dewey,36.02866,-99.34652,589,West Central,STANDARD
+131,CARL,Lake Carl Blackwell,Orlando,5,E,Payne,36.1473,-97.28585,293,Central,STANDARD
+112,CATO,Catoosa,Catoosa,4.7,NNW,Rogers,36.2619,-95.7572,232,Northeast,STANDARD
+23,CENT,Centrahoma,Centrahoma,1,E,Coal,34.60896,-96.33309,208,South Central,STANDARD
+24,CHAN,Chandler,Sparks,3,NNE,Lincoln,35.65282,-96.80407,291,Central,STANDARD
+25,CHER,Cherokee,Cherokee,0.5,SSW,Alfalfa,36.74813,-98.36274,362,North Central,STANDARD
+26,CHEY,Cheyenne,Cheyenne,6,SW,Roger Mills,35.54615,-99.7279,694,West Central,STANDARD
+27,CHIC,Chickasha,Chickasha,2,SSE,Grady,35.03236,-97.91446,328,Central,STANDARD
+28,CLAR,Claremore,Claremore,1,WNW,Rogers,36.3172,-95.6417,213,Northeast,STANDARD
+29,CLAY,Clayton,Clayton,3,NNE,Pushmataha,34.65657,-95.32596,186,Southeast,STANDARD
+30,CLOU,Cloudy,Cloudy,5,SSE,Pushmataha,34.22321,-95.2487,221,Southeast,STANDARD
+122,CLRM,Claremore,Claremore,1.8,WNW,Rogers,36.32112,-95.64617,207,Northeast,STANDARD
+31,COOK,Cookson,Marble City,7,NNW,Cherokee,35.68001,-94.84896,299,East Central,STANDARD
+32,COPA,Copan,Copan,2,ENE,Washington,36.90987,-95.88553,250,Northeast,STANDARD
+33,DURA,Durant,Durant,6,SSE,Bryan,33.92075,-96.32027,197,South Central,STANDARD
+139,ELKC,Elk City,Elk City,5,S,Beckham,35.33353,-99.39398,584,West Central,STANDARD
+34,ELRE,El Reno,El Reno,5,WNW,Canadian,35.54848,-98.03654,419,Central,STANDARD
+35,ERIC,Erick,Erick,4,ESE,Beckham,35.20494,-99.80344,603,West Central,STANDARD
+36,EUFA,Eufaula,Eufaula,4,WNW,McIntosh,35.30324,-95.65707,200,East Central,STANDARD
+141,EVAX,Eva,Eva,12,NE,Texas,36.921853,-101.78158,1065,Panhandle,STANDARD
+37,FAIR,Fairview,Fairview,1,W,Major,36.26353,-98.49766,405,North Central,STANDARD
+127,FITT,Fittstown,Fittstown,6.3,SW,Pontotoc,34.55205,-96.71779,350,South Central,STANDARD
+38,FORA,Foraker,Foraker,8,ESE,Osage,36.84053,-96.42777,330,Northeast,STANDARD
+39,FREE,Freedom,Freedom,3,SSW,Woodward,36.72562,-99.14234,530,North Central,STANDARD
+40,FTCB,Fort Cobb,Fort Cobb,4,NNW,Caddo,35.14887,-98.46607,422,Southwest,STANDARD
+41,GOOD,Goodwell,Goodwell,2,E,Texas,36.60183,-101.6013,997,Panhandle,STANDARD
+117,GRA2,Grandfield,Grandfield,3.3,W,Tillman,34.239444,-98.743583,341,Southwest,STANDARD
+42,GRAN,Grandfield,Grandfield,3,WNW,Tillman,34.2392,-98.7397,342,Southwest,STANDARD
+43,GUTH,Guthrie,Guthrie,4,WSW,Logan,35.84891,-97.47978,330,Central,STANDARD
+44,HASK,Haskell,Haskell,5,SSE,Muskogee,35.74798,-95.64047,183,East Central,STANDARD
+113,HECT,Hectorville,Hectorville,4.1,W,Okmulgee,35.84162,-96.0024,243,East Central,STANDARD
+45,HINT,Hinton,Hinton,7,W,Caddo,35.48439,-98.48151,493,Southwest,STANDARD
+46,HOBA,Hobart,Hobart,4,SE,Kiowa,34.98971,-99.05283,473,Southwest,CONTINUITY
+134,HOLD,Holdenville,Holdenville,3,ESE,Hughes,35.07073,-96.35595,280,East Central,STANDARD
+47,HOLL,Hollis,Gould,3,W,Harmon,34.6855,-99.83331,497,Southwest,STANDARD
+48,HOOK,Hooker,Hooker,1,W,Texas,36.85518,-101.22547,912,Panhandle,STANDARD
+49,HUGO,Hugo,Hugo,2,NW,Choctaw,34.03084,-95.54011,175,Southeast,STANDARD
+50,IDAB,Idabel,Idabel,5,SW,McCurtain,33.83013,-94.8803,110,Southeast,STANDARD
+120,INOL,Inola,Inola,3.1,ESE,Rogers,36.14246,-95.45067,190,Northeast,STANDARD
+51,JAYX,Jay,Jay,4,N,Delaware,36.4821,-94.78287,304,Northeast,STANDARD
+52,KENT,Kenton,Kenton,5,SE,Cimarron,36.82937,-102.8782,1322,Panhandle,STANDARD
+53,KETC,Ketchum Ranch,Velma,7,NW,Stephens,34.52887,-97.76484,341,South Central,STANDARD
+133,KIN2,Kingfisher,Kingfisher,1,W,Kingfisher,35.85431,-97.95442,323,Central,STANDARD
+54,KING,Kingfisher,Kingfisher,2,NE,Kingfisher,35.8805,-97.91121,319,Central,STANDARD
+55,LAHO,Lahoma,Lahoma,1,WSW,Major,36.38435,-98.11139,396,North Central,CONTINUITY
+56,LANE,Lane,Lane,1,WNW,Atoka,34.30876,-95.99716,181,South Central,STANDARD
+57,MADI,Madill,Lebanon,4.5,NNW,Marshall,34.03579,-96.94394,232,South Central,STANDARD
+58,MANG,Mangum,Mangum,5,SE,Greer,34.83592,-99.42398,460,Southwest,STANDARD
+59,MARE,Marena,Coyle,7,N,Payne,36.06434,-97.21271,327,Central,STANDARD
+60,MARS,Marshall,Marshall,3,SSE,Logan,36.1186,-97.6014,315,Central,STANDARD
+61,MAYR,May Ranch,Freedom,16,NNE,Woods,36.98707,-99.01109,555,North Central,STANDARD
+62,MCAL,McAlester,McAlester,4,S,Pittsburg,34.88231,-95.78096,230,East Central,STANDARD
+63,MEDF,Medford,Medford,1,SW,Grant,36.79242,-97.74577,332,North Central,STANDARD
+64,MEDI,Medicine Park,Medicine Park,3,W,Comanche,34.72921,-98.56936,487,Southwest,STANDARD
+65,MIAM,Miami,Miami,2,NE,Ottawa,36.88832,-94.84437,247,Northeast,STANDARD
+66,MINC,Minco,Minco,2,SSW,Grady,35.27225,-97.95553,430,Central,STANDARD
+125,MRSH,Marshall,Marshall,4,SSE,Logan,36.11685,-97.60685,311,Central,STANDARD
+67,MTHE,Mt Herman,Smithville,16,SW,McCurtain,34.31072,-94.82275,284,Southeast,STANDARD
+68,NEWK,Newkirk,Newkirk,8,E,Kay,36.8981,-96.91035,366,North Central,STANDARD
+123,NEWP,Newport,Ardmore,7,WNW,Carter,34.2281,-97.20142,283,South Central,STANDARD
+109,NINN,Ninnekah,Ninnekah,2,NNW,Grady,34.96774,-97.95202,356,Central,STANDARD
+69,NORM,Norman,Norman,3,NW,Cleveland,35.2556,-97.4836,360,Central,SUPER
+70,NOWA,Nowata,Delaware,3,SE,Nowata,36.74374,-95.60795,206,Northeast,STANDARD
+121,NRMN,Norman,Norman,2.1,NW,Cleveland,35.23611,-97.46488,357,Central,STANDARD
+71,OILT,Oilton,Oilton,6,ESE,Creek,36.03126,-96.49749,255,Central,CONTINUITY
+130,OKCE,Oklahoma City East,Oklahoma City,3,E,Oklahoma,35.47226,-97.46414,355,Central,STANDARD
+128,OKCN,Oklahoma City North,Oklahoma City,6.1,N,Oklahoma,35.5556,-97.5107,362,Central,STANDARD
+129,OKCW,Oklahoma City West,Oklahoma City,3.7,W,Oklahoma,35.47112,-97.58245,366,Central,STANDARD
+72,OKEM,Okemah,Okemah,3,E,Okfuskee,35.43172,-96.26265,263,Central,STANDARD
+73,OKMU,Okmulgee,Morris,3,SW,Okmulgee,35.58211,-95.91473,205,East Central,STANDARD
+74,PAUL,Pauls Valley,Pauls Valley,1,SSW,Garvin,34.7155,-97.22924,291,South Central,STANDARD
+75,PAWN,Pawnee,Pawnee,3,ENE,Pawnee,36.36114,-96.76986,283,Northeast,STANDARD
+76,PERK,Perkins,Perkins,2,NNW,Payne,35.99865,-97.04831,292,Central,STANDARD
+118,PORT,Porter,Clarksville,2.5,W,Wagoner,35.8257,-95.55976,193,Northeast,STANDARD
+114,PRES,Preston,Preston,1,N,Okmulgee,35.7247,-95.9886,300,East Central,STANDARD
+77,PRYO,Pryor,Adair,5,S,Mayes,36.36914,-95.27138,201,Northeast,STANDARD
+78,PUTN,Putnam,Putnam,3,N,Dewey,35.89904,-98.96038,589,West Central,STANDARD
+79,REDR,Red Rock,Red Rock,7,SSE,Noble,36.3559,-97.15306,293,North Central,STANDARD
+80,RETR,Retrop,Willow,10,ENE,Washita,35.12275,-99.36001,538,West Central,STANDARD
+81,RING,Ringling,Ringling,1,N,Jefferson,34.19365,-97.58812,283,South Central,STANDARD
+82,SALL,Sallisaw,Sallisaw,2,SSW,Sequoyah,35.43815,-94.79805,157,East Central,STANDARD
+83,SEIL,Seiling,Seiling,7,WNW,Woodward,36.19033,-99.0403,545,North Central,STANDARD
+143,SEMI,Seminole,Seminole,4,SSW,Seminole,35.1766,-96.70028,292,Central,STANDARD
+84,SHAW,Shawnee,Shawnee,3,NNW,Pottawatomie,35.36492,-96.94822,328,Central,STANDARD
+85,SKIA,Skiatook,Skiatook,4,NW,Osage,36.4153,-96.03706,282,Northeast,STANDARD
+86,SLAP,Slapout,Slapout,8,W,Beaver,36.59749,-100.26192,774,Panhandle,STANDARD
+87,SPEN,Spencer,Spencer,2,ENE,Oklahoma,35.54208,-97.34146,373,Central,STANDARD
+88,STIG,Stigler,Stigler,3,WNW,Haskell,35.26527,-95.18116,173,East Central,STANDARD
+89,STIL,Stillwater,Stillwater,2,W,Payne,36.12093,-97.09527,272,Central,STANDARD
+90,STUA,Stuart,Stuart,3,SE,Pittsburg,34.87642,-96.06982,256,East Central,STANDARD
+91,SULP,Sulphur,Sulphur,4,NNE,Murray,34.5661,-96.95048,320,South Central,STANDARD
+92,TAHL,Tahlequah,Tahlequah,4,N,Cherokee,35.97235,-94.98671,290,East Central,STANDARD
+138,TALA,Talala,Talala,3.9,NW,Rogers,36.57431,-95.74515,228,Northeast,STANDARD
+93,TALI,Talihina,Talihina,4,SE,LeFlore,34.7107,-95.01152,204,Southeast,CONTINUITY
+94,TIPT,Tipton,Tipton,4,S,Tillman,34.43972,-99.13755,387,Southwest,STANDARD
+95,TISH,Tishomingo,Tishomingo,6,N,Johnston,34.33262,-96.67895,268,South Central,STANDARD
+96,TULL,Tullahassee,Tullahassee,2,ENE,Wagoner,35.8397,-95.4133,189,Northeast,STANDARD
+137,TULN,Tulsa,Tulsa,4.2,NE,Tulsa,36.19666,-95.93883,209,Northeast,STANDARD
+140,VALL,Valliant,Valliant,5,SSW,McCurtain,33.938606,-95.114913,120,Southeast,STANDARD
+115,VANO,Vanoss,Vanoss,2.4,NE,Pontotoc,34.79146,-96.84381,320,South Central,STANDARD
+97,VINI,Vinita,Centralia,7,E,Craig,36.77536,-95.22094,236,Northeast,STANDARD
+136,WAL2,Walters,Walters,4,NW,Cotton,34.39957,-98.34569,323,Southwest,STANDARD
+98,WALT,Walters,Walters,1,NW,Cotton,34.3647,-98.32025,308,Southwest,STANDARD
+99,WASH,Washington,Washington,6,SSW,McClain,34.98224,-97.52109,345,Central,STANDARD
+100,WATO,Watonga,Watonga,7,W,Blaine,35.84185,-98.52615,517,West Central,STANDARD
+101,WAUR,Waurika,Waurika,0.5,ENE,Jefferson,34.16775,-97.98815,283,South Central,STANDARD
+102,WEAT,Weatherford,Weatherford,4,WSW,Custer,35.5083,-98.77509,538,West Central,STANDARD
+103,WEBB,Webbers Falls,Webbers Falls,3,S,Muskogee,35.47298,-95.13209,145,East Central,STANDARD
+132,WEBR,Webbers Falls,Webbers Falls,1.5,S,Muskogee,35.489,-95.1233,145,East Central,STANDARD
+104,WEST,Westville,Westville,5,WNW,Adair,36.011,-94.64496,348,East Central,STANDARD
+105,WILB,Wilburton,Wilburton,2,SW,Latimer,34.90092,-95.34805,199,Southeast,STANDARD
+106,WIST,Wister,Wister,3,ENE,LeFlore,34.98426,-94.68778,143,Southeast,STANDARD
+107,WOOD,Woodward,Woodward,2,WSW,Woodward,36.42329,-99.41682,625,North Central,STANDARD
+108,WYNO,Wynona,Wynona,2,S,Osage,36.51806,-96.34222,269,Northeast,STANDARD
+142,YUKO,Yukon,Yukon,2,N,Canadian,35.55671,-97.75538,407,Central,STANDARD

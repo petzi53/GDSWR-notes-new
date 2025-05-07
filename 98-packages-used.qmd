@@ -1,0 +1,364 @@
+# Packages used {#sec-annex-z}
+
+```{r}
+#| label: setup
+#| results: hold
+#| include: false
+
+base::source(file = paste0(here::here(), "/R/helper.R"))
+```
+
+## cowplot {#sec-cowplot}
+
+:::::: my-package
+::: my-package-header
+Package Profile: cowplot
+:::
+
+:::: my-package-container
+<center>[Streamlined Plot Theme and Plot Annotations for {**ggplot2**}](https://wilkelab.org/cowplot/) [@cowplot]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-cowplot-min.png){width="176"}
+
+The {**cowplot**} package provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in the Wilke lab, hence the name (Claus O. Wilke’s plot package). It has also been used extensively in the book [Fundamentals of Data Visualization](https://www.amazon.com/gp/product/1492031089).
+:::
+
+------------------------------------------------------------------------
+
+There are several packages that can be used to align plots. The most widely used ones beside {**cowplot**} are {**egg**} and {**patchwork**} (see @sec-patchwork). All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
+
+Most importantly, while {**egg**} and {**patchwork**} align and arrange plots at the same time, {**cowplot**} aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.
+
+The {**cowplot**} package now provides a set of complementary themes with different features. I now believe that there isn’t one single theme that works for all figures, and therefore I recommend that you always explicitly set a theme for every plot you make.
+::::
+::::::
+
+## dplyr {#sec-dplyr}
+
+:::::: my-package
+::: my-package-header
+Package Profile: dplyr
+:::
+
+:::: my-package-container
+<center>[A Grammar of Data Manipulation](https://dplyr.tidyverse.org/) [@dplyr]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-dplyr-min.png){width="176"}
+
+{**dplyr**} is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges: - mutate() adds new variables that are functions of existing variables - select() picks variables based on their names. - filter() picks cases based on their values. - summarise() reduces multiple values down to a single summary. - arrange() changes the ordering of the rows.
+:::
+
+------------------------------------------------------------------------
+
+These all combine naturally with `group_by()` which allows you to perform any operation “by group”. You can learn more about them in [vignette("dplyr")](https://dplyr.tidyverse.org/articles/dplyr.html). As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in [vignette("two-table")](https://dplyr.tidyverse.org/articles/two-table.html). [@dplyr]
+::::
+::::::
+
+## forcats {#sec-forcats}
+
+:::::: my-package
+::: my-package-header
+Package Profile: forcats
+:::
+
+:::: my-package-container
+<center>[Tools for Working with Categorical Variables (Factors)](https://forcats.tidyverse.org/) [@forcats]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-forcats-min.png){width="176"}
+
+{**forcats**} provide a suite of useful tools that solve common problems with factors. "Forcats" is an anagram of "factors" and part of the {**tidyverse**} suite of packages.
+:::
+
+(1) reordering factor levels
+    -   moving specified levels to front,
+    -   ordering by first appearance,
+    -   reversing, and
+    -   randomly shuffling
+(2) tools for modifying factor levels
+    -   collapsing rare levels into other,
+    -   'anonymizing', and
+    -   manually 'recoding'
+::::
+::::::
+
+## ggplot2 {#sec-ggplot2}
+
+:::::: my-package
+::: my-package-header
+Package Profile: ggplot2
+:::
+
+:::: my-package-container
+<center>[Create Elegant Data Visualisations Using the Grammar of Graphics](https://ggplot2.tidyverse.org/) [@ggplot2]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-ggplot2-min.png){width="176"}
+
+{**ggplot2**} is a system for declaratively creating graphics, based on [The Grammar of Graphics](https://link.springer.com/book/10.1007/0-387-28695-0). You provide the data, tell {**ggplot2**} how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details. [@ggplot2]
+:::
+
+------------------------------------------------------------------------
+
+It’s hard to succinctly describe how {**ggplot2**} works because it embodies a deep philosophy of visualization. However, in most cases you start with `ggplot()`, supply a dataset and aesthetic mapping (with `aes()`). You then add on layers (like `geom_point()` or `geom_histogram()`), scales (like `scale_colour_brewer()`), faceting specifications (like `facet_wrap()`) and coordinate systems (like `coord_flip()`).
+::::
+::::::
+
+## glossary {#sec-glossary}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: glossary
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[Glossaries for Markdown and Quarto Documents](https://debruine.github.io/glossary/) [@glossary]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-glossary-min.png){width="176"}
+
+Add glossaries to markdown and quarto documents by tagging individual words. Definitions can be provided inline or in a separate file.
+
+:::
+
+------------------------------------------------------------------------
+
+There is a lot of necessary jargon to learn for working with geospatial data. The goal of this glossary is to provide a lightweight solution for making glossaries in educational materials written in quarto or R Markdown. This package provides functions to link terms in text to their definitions in an external glossary file, as well as create a glossary table of all linked terms at the end of a section.
+::::
+::::::
+
+
+
+## glue {#sec-glue}
+
+:::::: my-package
+::: my-package-header
+Package Profile: glue
+:::
+
+:::: my-package-container
+<center>[Interpreted String Literals](https://glue.tidyverse.org/) [@glue]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-glue-min.png){width="176"}
+
+An implementation of interpreted string literals, inspired by Python's Literal String Interpolation
+
+:::
+
+***
+
+
+Glue offers interpreted string literals that are small, fast, and dependency-free. Glue does this by embedding R expressions in curly braces which are then evaluated and inserted into the argument string.
+::::
+::::::
+
+## gridExtra {#sec-gridExtra}
+
+::::: my-package
+::: my-package-header
+Package Profile: gridExtra
+:::
+
+::: my-package-container
+
+------------------------------------------------------------------------
+
+<center>[Miscellaneous Functions for "Grid" Graphics](https://cran.r-project.org/package=gridExtra) [@gridExtra]</center>
+
+------------------------------------------------------------------------
+
+<center>(*There is no hexagon sticker available for {**gridExtra**}.*)</center>
+
+Provides a number of user-level functions to work with "grid" graphics, notably to arrange multiple grid-based plots on a page, and draw tables.
+
+The {**grid**) package (= part of the R system library) provides low-level functions to create graphical objects (`grobs`), and position them on a page in specific viewports. The {**gtable**} package introduced a higher-level layout scheme, arguably more amenable to user-level interaction. With the `gridExtra::arrangeGrob()` / `gridExtra::grid.arrange()` pair of functions, {**gridExtra**} builds upon {**gtable**} to arrange multiple `grobs` on a page.
+:::
+:::::
+
+## gtable {#sec-gtable}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: gtable
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[Arrange 'Grobs' in Tables](https://gtable.r-lib.org) [@gtable]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-gtable-min.png){width="176"}
+
+Tools to make it easier to work with "tables" of 'grobs'. The 'gtable' package defines a 'gtable' grob class that specifies a grid along with a list of grobs and their placement in the grid. Further the package makes it easy to manipulate and combine 'gtable' objects so that complex compositions can be built up sequentially.
+
+:::
+::::
+::::::
+
+
+
+
+## patchwork {#sec-patchwork}
+
+::::::::::::: my-package
+::: my-package-header
+Package Profile: patchwork
+:::
+
+::::::: my-package-container
+<center>[The Composer of Plots](https://patchwork.data-imaginist.com/) [@patchwork]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-patchwork-min.png){width="176"}
+
+The goal of {**patchwork**} is to make it ridiculously simple to combine separate `ggplots` into the same graphic. As such it tries to solve the same problem as `gridExtra::grid.arrange()` and `cowplot::plot_grid` but using an `r glossary("APIx", "API")` that incites exploration and iteration, and scales to arbitrarily complex layouts.
+:::
+
+------------------------------------------------------------------------
+
+The {**ggplot2**} package provides a strong API for sequentially building up a plot, but does not concern itself with composition of multiple plots. {**patchwork**} is a package that expands the API to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots. Other packages that try to address this need (but with a different approach) are {**gridExtra**} and {**cowplot**} (see @sec-gridExtra and @sec-cowplot).
+
+Before plots can be laid out, they have to be assembled. Arguably one of patchwork’s biggest selling points is that it expands on the use of `+` in ggplot2 to allow plots to be added together and composed, creating a natural extension of the {**ggplot2**} API.
+
+While quite complex compositions can be achieved using `+`, `|`, and `/`, it may be necessary to take even more control over the layout. All of this can be controlled using the `patchwork::plot_layout()` function along with a couple of special placeholder objects.
+
+::::: my-remark
+::: my-remark-header
+{patchwork}: Personal Evaluation
+:::
+
+::: my-remark-container
+In this book I am using the dobble colon notation instead of a `library()` call. Without this call it is more difficult to use the {**patchwork**} package.
+
+See [Using plot arithmetic functions with `::` syntax](https://github.com/thomasp85/patchwork/issues/351#issuecomment-1931140157)
+
+| operator | function                    | effect       |
+|----------|-----------------------------|--------------|
+| \+       | `ggplot2:::"+.gg"()`        | side by side |
+| \-       | `patchwork:::"-.ggplot"()`  |              |
+| \|       | `patchwork:::"\|.ggplot"()` |              |
+| /        | `patchwork:::"/.ggplot"()`  | stacked      |
+| \*       | `patchwork:::"*.gg"()`      |              |
+| &        | `patchwork:::"&.gg"()`      |              |
+:::
+:::::
+:::::::
+::::::::
+
+## plotly {#sec-plotly}
+
+:::::: my-package
+::: my-package-header
+Package Profile: plotly
+:::
+
+:::: my-package-container
+<center>[Create Interactive Web Graphics via 'plotly.js'](https://plotly.com/r/) [@plotly]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-plotly-min.png){width="176"}
+
+Create interactive web graphics from 'ggplot2' graphs and/or a custom interface to the (MIT-licensed) JavaScript library 'plotly.js' inspired by the grammar of graphics.
+:::
+
+------------------------------------------------------------------------
+
+Plotly.js is a standalone Javascript data visualization library, and it also powers the Python and R modules named plotly in those respective ecosystems (referred to as Plotly.py and Plotly.R).
+
+Plotly.js can be used to produce dozens of chart types and visualizations, including statistical charts, 3D graphs, scientific charts, SVG and tile maps, financial charts and more.
+::::
+::::::
+
+
+## skimr {#sec-skimr}
+
+::::::::: my-package
+::: my-package-header
+Package Profile: skimr
+:::
+
+::::::: my-package-container
+<center>[Compact and Flexible Summaries of Data](https://docs.ropensci.org/skimr/) [@skimr]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-skimr-min.png){width="176"}
+
+A simple to use summary function that can be used with pipes and displays nicely in the console.
+:::
+
+------------------------------------------------------------------------
+
+The default summary statistics may be modified by the user as can the default formatting. Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the [Using skimr](https://docs.ropensci.org/skimr/articles/skimr.html) vignette and the [README](https://github.com/ropensci/skimr/#skimr-).
+
+::::: my-remark
+::: my-remark-header
+{skimr}: Personal Evaluation
+:::
+
+::: my-remark-container
+At the moment I am just using the `skimr::skim()` function. I believe most of the many other functions for adaption are oriented to developers. But still: I need to have a closer look to this package.
+:::
+:::::
+:::::::
+:::::::::
+
+## tidyverse {#sec-tidyverse}
+
+::::::::: my-package
+::: my-package-header
+Package Profile: tidyverse
+:::
+
+::::::: my-package-container
+<center>[Easily Install and Load the 'Tidyverse'](https://www.tidyverse.org/) [@tidyverse]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-tidyverse-min.png){width="176"}
+
+The {**tidyverse**} is an opinionated [collection of R packages](https://www.tidyverse.org/packages/) designed for data science.
+:::
+
+------------------------------------------------------------------------
+
+All packages share an underlying design philosophy, grammar, and data structures [@tidyverse]. Read more about the philosophy and purpose: [The tidy tools manifesto](https://tidyverse.tidyverse.org/articles/manifesto.html) and [Welcome to the {**tidyverse**}](https://tidyverse.tidyverse.org/articles/paper.html)
+
+::::: my-remark
+::: my-remark-header
+{tidyverse}: Personal Evaluation
+:::
+
+::: my-remark-container
+In this book I am not going to load {**tidyverse**} with all its packages. Instead I am using the `<package>::<function>` format to access the commands. Explicitly mentioned the used packages with every function call helps me to learn which package is responsible for which function.
+:::
+:::::
+:::::::
+:::::::::
+

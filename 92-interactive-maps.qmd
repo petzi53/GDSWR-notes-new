@@ -1,0 +1,163 @@
+
+---
+knitr: 
+    opts_chunk: 
+      code-fold: show
+      results: hold
+  
+---
+# Interactive Choroploth Maps {#sec-annex-c}
+
+
+```{r}
+#| label: setup
+#| results: hold
+#| include: false
+
+base::source(file = "R/helper.R")
+ggplot2::theme_set(ggplot2::theme_bw())
+
+```
+
+## Table of content for chapter 04 {.unnumbered}
+
+::::: {#obj-chap03}
+:::: {.my-objectives}
+::: {.my-objectives-header}
+Chapter section list
+:::
+
+::: {.my-objectives-container}
+
+
+
+:::
+::::
+:::::
+
+
+In this section I am trying to generate interactive maps with the help of the {**plotly**} package. I will follow the article [Choropleth Maps in R](https://plotly.com/r/choropleth-maps/) from the plotly website.
+
+## Main parameters
+
+Making choropleth maps with {**plotly**} requires two main types of input:
+
+1. Geometry information: This can either be a supplied `r glossary("GeoJSON")` file where each feature has either an id field or some identifying value in properties; or one of the built-in geometries within plot_ly: US states and world countries (see below)
+2. A list of values indexed by feature identifier.
+
+::: {.my-code-collection}
+:::: {.my-code-collection-header}
+::::: {.my-code-collection-icon}
+:::::
+:::::: {#exm-annex-c-load-choropleth-input}
+: Load input data for choropleth map
+::::::
+
+::::
+
+::::{.my-code-collection-container}
+
+::: {.panel-tabset}
+
+###### GeoJSON
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-c-load-geojson-feature-id}
+: Load geometry information
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: annex-c-load-geojson-feature-id
+
+URL_geoJSON = "https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json"
+counties <- rjson::fromJSON(file = URL_geoJSON)
+
+counties$features[[1]]
+```
+***
+
+The `r glossary("GeoJSON")` file contains the geometry information for US counties, and has as feature ID the `r glossary("FIPS")` code in the column `feature.id`.
+::::
+:::::
+
+
+###### County data
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-load-county-data}
+: Load unemployment data by county, also indexed by FIPS code.
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: load-county-data
+
+URL_data = "https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv"
+df <- readr::read_csv(URL_data,
+                      show_col_types = FALSE)
+
+utils::head(df)
+
+```
+
+
+
+::::
+:::::
+
+:::
+
+::::
+:::::
+
+## Choropleth map using GeoJSON
+
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-c-chropleth-map-geojson}
+: Choropleth map using GeoJSON
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: fig-choropleth-map-geojson
+#| fig-cap: "Example for a choropleth map using a GeoJSON file"
+
+g <- list(
+  scope = 'usa',
+  projection = list(type = 'albers usa'),
+  showlakes = TRUE,
+  lakecolor = plotly::toRGB('white')
+)
+
+fig <- plotly::plot_ly() |> 
+    plotly::add_trace(
+        type = "choropleth",
+        geojson = counties,
+        locations = df$fips,
+        z = df$unemp,
+        colorscale = "Viridis",
+        zmin = 0,
+        zmax = 12,
+        marker = list(line = list(width = 0))
+        ) |> 
+    plotly::colorbar(title = "Unemployment Rate (%)") |> 
+    plotly::layout(
+        title = "2016 US Unemployment by County",
+        geo = g
+    )
+
+fig
+
+```
+
+***
+
+In this example we set layout.geo.scope to usa to automatically configure the map to display USA-centric data in an appropriate projection.
+
+::::
+:::::

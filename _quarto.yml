@@ -3,19 +3,31 @@ project:
   pre-render: R/helper.R
 
 book:
-  title: "Inequality in Austria"
+  title: "Geographic Datascience with R"
   author: "Peter Baumgartner"
   date: last-modified
   date-format: YYYY-MM-DD HH:mm
   favicon: "img/favicon_io/apple-touch-icon.png"
-  site-url: https://bookdown.org/pbaumgartner/REPO-NAME/
-  repo-url: https://github.com/petzi53/REPO-NAME
+  site-url: https://bookdown.org/pbaumgartner/gdswr-notes
+  repo-url: https://github.com/petzi53/GDSWR-notes
   repo-branch: master
   repo-actions: [edit, issue]
   page-navigation: true
 
   chapters:
     - index.qmd
+    - 01-intro-to-R.qmd
+    - 02-graphics-with-ggplot2.qmd
+    - 03-processing-tabular-data.qmd
+    - 04-dates-in-R.qmd
+    - 05-vector-geospatial-data.qmd
+    - 06-raster-continuous.qmd
+  appendices:
+    - 90-sf-load-save.qmd
+    - 91-creating-maps.qmd
+    - 95-austrian-data.qmd
+    - 98-packages-used.qmd
+
 
 bibliography:
     - references.bib

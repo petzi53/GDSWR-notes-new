@@ -1,0 +1,798 @@
+---
+knitr: 
+    opts_chunk: 
+      code-fold: show
+      results: hold
+---
+
+# Creating Maps {#sec-annex-b}
+
+```{r}
+#| label: setup
+#| results: hold
+#| include: false
+
+base::source(file = "R/helper.R")
+ggplot2::theme_set(ggplot2::theme_bw())
+
+```
+
+## Introduction
+
+I am following here the article [@felixanalytix-2023] and video
+[@felixanalytix-2023a].
+
+Article and video explain how to
+
+1.  create a choropleth world map using World Bank data,
+2.  zoom on any specific region of the world using Openstreetmap, and
+3.  improve the scale and color palette of your maps.
+
+As an example Europe will be visualized. But you can reuse the R code
+shared in this article on any region of your choice.
+
+::::: my-resource
+::: my-resource-header
+Packages used in this article
+:::
+
+::: my-resource-container
+Besides packages from the {**tidyverse**} the article uses
+
+-   the {**rnaturalearth**} R package to download raw data from the
+    Natural Earth Project,
+-   the library {**sf**} to work with simple features in R,
+-   and the library {**wbstats**} for the World Bank API.
+:::
+:::::
+
+## Download world data
+
+For downloading world data for the map, we will call the
+rnaturalearth::ne_countries() function with scale as “medium” (we don’t
+need detailed geographic data) and the returnclass will be “sf” (we want
+an sf object to work with the {**sf**} package).
+
+We will immediately Antartica remove from the dataset.
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-download-world-data}
+: Download world data and remove Antartica
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: download-world-data
+
+world <- rnaturalearth::ne_countries(
+        scale = "medium",
+        returnclass = "sf"
+    ) |> 
+    dplyr::filter(admin != "Antarctica")
+```
+
+<center>(*For this R code chunk is no output available*)</center>
+:::
+::::::
+
+## Changing world map projection
+
+Changing the world map projection can easily be done using the
+`sf::st_transform()` function. Here we decide to use the [mollweide
+projection](https://en.wikipedia.org/wiki/Mollweide_projection).
+
+![Mollweide projection of the world: Wikipedia
+(https://upload.wikimedia.org/wikipedia/commons/9/9e/Mollweide_projection_SW.jpg)](https://upload.wikimedia.org/wikipedia/commons/9/9e/Mollweide_projection_SW.jpg){#fig-annex-b-mollweide-projection
+.lightbox
+fig-alt="Mollweide projection: Mollweide is a pseudocylindrical projection in which the equator is represented as a straight horizontal line perpendicular to a central meridian that is one-half the equator's length. The other parallels compress near the poles, while the other meridians are equally spaced at the equator. The meridians at 90 degrees east and west form a perfect circle, and the whole earth is depicted in a proportional 2:1 ellipse."
+fig-align="center" width="100%"}
+
+> The Mollweide is a pseudocylindrical projection in which the equator
+> is represented as a straight horizontal line perpendicular to a
+> central meridian that is one-half the equator's length. The other
+> parallels compress near the poles, while the other meridians are
+> equally spaced at the equator. The meridians at 90 degrees east and
+> west form a perfect circle, and the whole earth is depicted in a
+> proportional 2:1 ellipse. The proportion of the area of the ellipse
+> between any given parallel and the equator is the same as the
+> proportion of the area on the globe between that parallel and the
+> equator, but at the expense of shape distortion, which is significant
+> at the perimeter of the ellipse…
+> ([Wikipedia](https://en.wikipedia.org/wiki/Mollweide_projection))
+
+There are numerous different projection explained in PROJ
+[@evenden-2024] a generic coordinate transformation software that
+transforms geospatial coordinates from one coordinate reference system
+(CRS) to another. This includes cartographic projections as well as
+geodetic transformations.
+
+Consulting the [PROJ](https://proj.org) manual [@proj-contributors-2024]
+is vital to get the code that `sf::st_transform()` needs as parameter
+for the transformation. This code for the [Mollweide
+projection](https://proj.org/en/stable/operations/projections/moll.html#mollweide)
+is `+proj=moll`.
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-mollweide-projection}
+: Change world map projection to Mollweide projection
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: mollweide-projection
+
+target_crs = "+proj=moll"
+world_moll <- world |> 
+    sf::st_transform(crs = target_crs)
+```
+:::
+::::::
+
+## Getting World Bank data
+
+How to use the {**wbstats**} package is explained well in the package
+[vignette](https://gshs-ornl.github.io/wbstats/articles/wbstats.html).
+To get data for our map example we will download the indicator
+“employment (% of the labor force)”. It is an arbitrary indicator chosen
+from a list of all the indicators available in the World Bank API
+generated with the `wbstats::wb_cachelist()` function. We will filter
+this indicator using again the `dplyr::filter()` function.
+
+For the most recent information on available data from the World Bank
+API wbstats::wb_cache() downloads an updated version of the information
+stored in wb_cachelist. wb_cachelist is simply a saved return of
+wb_cache(lang = "en"). To use this updated information in wb_search() or
+wb_data(), set the cache parameter to the saved list returned from
+wb_cache(). It is always a good idea to use this updated information to
+insure that you have access to the latest available information, such as
+newly added indicators or data sources.
+
+::::: my-procedure
+::: my-procedure-header
+Download "Unemployment" indicator
+:::
+
+::: my-procedure-container
+To download data you need to follow several steps:
+
+1.  Instead of using the information stored in `wbstats::wb_cachelist()`
+    update data with `wbstats::wb_cache()`
+2.  Use `wbstats::wb_search()` to find the parameter(s) for the
+    indicator(s) your are looking for.
+3.  Filter the search results to keep only the indicator(s) you are
+    interested in.
+4.  Download World Bank the appropriate indicator data with
+    `wbstats::wb_data()`.
+:::
+:::::
+
+:::::::::::::::::::::::::::::::::: my-code-collection
+::::: my-code-collection-header
+::: my-code-collection-icon
+:::
+
+::: {#exm-annex-b-download-world-bank-data}
+: Download world bank data
+:::
+:::::
+
+:::::::::::::::::::::::::::::: my-code-collection-container
+::::::::::::::::::::::::::::: panel-tabset
+###### 1. Update data
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-update-world-bank-data}
+: Update world bank data
+:::
+::::
+
+::: my-r-code-container
+<center>**The following chunk takes several seconds. Run this code chunk
+manually if you need an updated version.**</center>
+
+```{r}
+#| label: update-world-bank-data
+#| eval: false
+
+
+my_create_folder("data/annex-b")
+
+new_cache <- wbstats::wb_cache(lang = "en")
+my_save_data_file("annex-b", new_cache, "new_cache.RDS")
+```
+
+<center>(*For this R code chunk is no output available*)</center>
+:::
+::::::
+
+The expression in the parentheses `lang = "en"` wouldn't be necessary
+because the default language is English.
+
+###### Compare datasets
+
+::::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-compare-world-bank-datasets}
+: Compare cachelist and new_cache World Bank datasets
+:::
+::::
+
+:::: my-r-code-container
+```{r}
+#| label: compare-world-bank-datasets
+
+file_to_check <- "data/annex-b/new_cache.RDS"
+
+if (file.exists(file_to_check)) {
+    new_cache <- base::readRDS(file_to_check)
+    base::cat("********** Updated World Bank Data Set *********\n")
+    utils::str(new_cache, max.level = 1)
+} else {
+    base::cat("********** No new dataset available *********\n")
+    base::cat("********** Run the previous 'Update data' tab manually *********\n")
+}
+
+base::cat("\n********** World Bank Data Set in wb_cachelist *********\n")
+utils::str(wbstats::wb_cachelist, max.level = 1)
+```
+
+------------------------------------------------------------------------
+
+There are some notable differences in my datasets between the release of
+the {**wbstats**} package (2020-12-04) and my update four year later
+(2024-12-31):
+
+-   The number of countries and regions is in the updated version
+    smaller than in the `wbstats::wb_cachelist` version.
+-   The numbers of indicators has in the updated list risen from 16,649
+    to 23,678.
+-   The number of sources has increased slightly from 63 to 69.
+-   The other four data frames didn't change.
+
+::: callout-note
+The numbers are the result of the differences. For instance the
+difference of four regions is the result of two more regions in the
+updates version ("Africa Eastern and Southern" and "Africa Western and
+Central") contra six less regions ("Andean Region", "Latin America and
+the Caribbean", "Central America", "Non-resource rich Sub-Saharan Africa
+countries, of which landlocked", "Resource rich Sub-Saharan Africa
+countries, of which oil exporters", "Southern Cone")
+
+The situation is even more complicated in the country case: There are in
+sum 64 differences in various columns, some of them just different names
+(Czech Republik versus Czechia). These 64 distinctions consist of more
+and less countries in the two datasets compared and boil down to the
+number of eight rows. But behind these eight rows lurk 64 mismatches.
+
+The four data frames with the same number of rows ("topics",
+"income_levels", "lending_types", "languages) are not the result of
+different mismachtes. These four tibbles are actually identical.
+:::
+::::
+:::::::
+
+###### Show data
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-show-world-bank-data}
+: Show World Bank datasets
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: show-world-bank-data
+#| results: markup
+
+file_to_check <- "data/annex-b/new_cache.RDS"
+
+
+if (file.exists(file_to_check)) {
+    my_cache <- base::readRDS(file_to_check)
+} else {
+    my_cache <- wbstats::wb_cachelist
+}
+
+base::cat("********** List details of all eight tibbles *********\n")
+my_cache
+```
+:::
+::::::
+
+###### 2. Search data
+
+::::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-search-world-bank-data}
+: Search World Bank data
+:::
+::::
+
+:::: my-r-code-container
+```{r}
+#| label: search-world-bank-data
+
+file_to_check <- "data/annex-b/new_cache.RDS"
+
+if (file.exists(file_to_check)) {
+    my_cache <- base::readRDS(file_to_check)
+} else {
+    my_cache <- wbstats::wb_cachelist
+}
+
+employment_inds<- wbstats::wb_search(
+    pattern = "Unemployment, total",
+    extra = TRUE,
+    cache = my_cache)
+
+dplyr::glimpse(employment_inds)
+```
+
+------------------------------------------------------------------------
+
+Searching for “Unemployment (% of the labor force)” returned an empty
+data frame. The new (updated) search string is "Unemployment, total".
+This search returns two results. The first row uses for the percentage
+of unemployment national statistics and can therefore vary between
+different countries. The second row uses the modeled estimate of the
+`r glossary("ILOx", "ILO")`.
+
+I am going to use the ILO unemployment indicator `SL.UEM.TOTL.ZS` as
+used in the blog example by Felix Analytix.
+
+To provide the source for creating graphics I need the content of the
+"source_org`column. By the default the parameter`extra =
+FALSE`provides only indicator ID, the short name and the description of the indicator. To get all columns of the cache parameters's indicator we need to set`extra
+= TRUE\`.
+
+::: {.callout-important style="color: red;"}
+The larger string "Unemployment, total (% of total labor force)" did not
+work for me and returned an empty data frame.
+
+One has to have already specific knowledge to get not too many rows
+returned. If you are using just "Unemployment" then you have to skim
+through 93 observations to find your indicator.
+:::
+::::
+:::::::
+
+###### 3. Filter data
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-filter-data}
+: Filter World Bank data
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: filter-data
+
+ind <- "SL.UEM.TOTL.ZS"
+
+indicator_info <- employment_inds |> 
+    dplyr::filter(indicator_id == ind)
+
+indicator_info$indicator
+indicator_info$indicator_desc
+indicator_info$source_org
+```
+:::
+::::::
+
+###### 4. Download data
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-download-data}
+: Numbered R Code Title
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: download-data
+
+file_to_check <- "data/annex-b/new_cache.RDS"
+
+if (file.exists(file_to_check)) {
+    my_cache <- base::readRDS(file_to_check)
+} else {
+    my_cache <- wbstats::wb_cachelist
+}
+
+df <- wbstats::wb_data(
+    indicator = ind,
+    start_date = 2023,
+    end_date = 2023,
+    cache = my_cache
+    )
+
+dplyr::glimpse(df)
+```
+
+------------------------------------------------------------------------
+
+Looking at <https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS>, I
+learned the latest data are from 2023.
+:::
+::::::
+:::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::
+
+## Visualizing data distribution
+
+With a very quick data exploratory analysis we will see the distribution
+of our indicator.
+
+:::::::::::::::: my-code-collection
+::::: my-code-collection-header
+::: my-code-collection-icon
+:::
+
+::: {#exm-annex-b-vis-data-dist}
+: Visualize data distribution
+:::
+:::::
+
+:::::::::::: my-code-collection-container
+::::::::::: panel-tabset
+###### Data as-is
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-show-dist-as-is}
+: Show the data distribution without transformation
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: fig-show-dist-as-is
+#| fig-cap: Data distribution of unemployment rate
+
+
+df |> 
+    dplyr::filter(!is.na(SL.UEM.TOTL.ZS)) |> 
+    ggplot2::ggplot(ggplot2::aes(SL.UEM.TOTL.ZS)) +
+    ggplot2::geom_histogram(bins = 100)
+```
+
+------------------------------------------------------------------------
+
+Most of the data show 3-6% unemployment rate. This can be a bit annoying
+because we will hardly see the difference in the color palette for these
+specific percentages.
+
+I will therefore use a square root transformation on the percentage
+values so that the color palette will be better distributed (showed in
+the next tab).
+:::
+::::::
+
+###### Data transformed
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-show-data-transformed}
+: Show the data distribution with a square root transformation
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: fig-show-data-transformed
+#| fig-cap: Data distribution of unemployment rate with square root transformation
+
+df |> 
+    dplyr::filter(!is.na(SL.UEM.TOTL.ZS)) |> 
+    ggplot2::ggplot(ggplot2::aes(SL.UEM.TOTL.ZS)) +
+    ggplot2::geom_histogram(bins = 100) +
+    ggplot2::scale_x_sqrt()
+```
+
+------------------------------------------------------------------------
+
+With the square root transformation the data are somewhat better
+distributed.
+:::
+::::::
+:::::::::::
+::::::::::::
+::::::::::::::::
+
+## Plotting a world map
+
+We are now prepared to join our World Bank data to the previously
+generated geographic `world_moll` sf object (see:
+@cnj-annex-b-mollweide-projection). 
+
+::: {.callout-warning #wrn-annex-b-iso3c-code}
+###### "iso_a3" does not contain all ISO 3166 Country Codes
+
+The blog entry recommends to join the World Bank data object `df` by "iso3c" code which represents the alpha-3 `r glossary("ISO 3166 Country Codes")`). But it does it with "iso_a3" code from the naturalearthdata object "wordl_moll". But it turned out that in my case "iso_a3" does not contain correct data for all countries. For instance is has -99 for France and Norway instead of the valide codes of "FRA" and "NOR". The result is that these tw3o countries are greyed out in the colored map reprsentation of the unemployment rate.
+
+Instead I am going to use "adm0_a3". I could also use "iso_a3_eh" as a Brave-KI research result says:
+
+> The `iso_a3_eh` field in Natural Earth data is used to provide a more flexible interpretation of ISO 3-character country codes. The “eh” suffix stands for “okay, but not great” in American English slang, indicating that while the code is not strictly accurate according to ISO standards, it is close enough for most practical purposes. This field was added to help users who are looking for a simpler, albeit less precise, match for their data visualization or analysis needs. For instance, France’s `iso_a2` field is set to `-99` to indicate a strict ISO match is not available, while `iso_a2_eh` is set to `FR`. Similarly, Norway’s `iso_a3` might be `-99`, but `iso_a3_eh` would be `NOR`.
+
+See also the discussion in the [GitHub thread](https://github.com/nvkelso/natural-earth-vector/issues/268) especially the following [comment/answer of the developer](https://github.com/nvkelso/natural-earth-vector/issues/268#issuecomment-778832542).
+
+:::
+
+Using the {**ggplot2**} R package, we will create a world map with the
+function `ggplot2::geom_sf()`. We will also make the square root
+transformation to see more clearly the percentage differences.
+
+
+
+:::::: my-r-code
+:::: my-r-code-header
+::: {#cnj-annex-b-world-map-2023}
+: Unemployment rate in 2023
+:::
+::::
+
+::: my-r-code-container
+```{r}
+#| label: fig-world-map-2023
+#| fig-cap: "World map of 2023 unemployment, data source: World Bank"
+
+world_moll |>  
+    dplyr::left_join(df, by = c("adm0_a3" = "iso3c")) |> 
+    ggplot2::ggplot() + 
+    ggplot2::geom_sf(ggplot2::aes(fill = SL.UEM.TOTL.ZS)) + 
+    ggplot2::scale_fill_viridis_c(
+        trans = "sqrt", 
+        labels = scales::percent_format(scale = 1), 
+        breaks = c(1:5)^2
+        ) + 
+    
+    ## fix labels if needed: https://stackoverflow.com/a/60733863 
+    ## not necessary, only for Linux/Fedora systems
+    # ggplot2::scale_x_continuous(labels = function(x) paste(x, '\udoBo' , "W")) +
+    # ggplot2::scale_y_continuous(labels = function(x) paste(x, '\uboBo', "N" )) +
+    
+    ggplot2::theme_bw() + 
+    ggplot2::theme(
+        panel.background = ggplot2::element_rect(fill = "aliceblue")
+        ) + 
+    ggplot2::labs (
+        title = paste(unique(df$date), indicator_info$indicator), 
+        fill = NULL, 
+        caption = paste0("Source: ", 
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 1),
+            ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 2),
+             ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 3),
+            ". ",
+             stringr::str_split_i(indicator_info$source_org, "\\. ", -1)
+        )
+    )
+        
+```
+
+
+------------------------------------------------------------------------
+
+The two data frames are joined by the ISO-alpha3 codes that have
+different names in the two datasets.
+
+The `scale_fill_viridis()` function is designed to be perceived by
+viewers with common forms of colour blindness. We have used the
+`ggplot2::scale_fill_viridis_c()` function, and applied the “trans”
+argument to specify the "sqrt" transformation. We have also adjusted the
+“breaks” argument accordingly.
+
+Without splitting the caption text it would be too long to fit into one
+line.
+:::
+::::::
+
+
+
+## Zooming into a specific area
+
+To zoom on a specific area, you need to know its coordinates, i.e., its
+bounding box. You can't determine the exact coordinates from the world
+map because the graph is too coarse.
+[OpenStreetMap](https://www.openstreetmap.org/) has a [nice
+tool](https://www.openstreetmap.org/export) to get the coordinates of a
+specific bounding box.
+
+![Screenshot: Creating bounding box with
+OpenStreetMap.](img/my-openstreetmap-bounding-box-min.png){#fig-annex-b-bounding-box
+fig-alt="OpenStreetMap export view: On the left panel with 25% of the page width you see the coordinates of the bounding box from the right side, overlaying a world map (75% of the page width). The coordinates are written in a gray box on the left panes with four figures in little white fields situated top, left, bottom and right. The figures are (starting from the top clockwise): 71.5, 41.5, 34.31, -25.5"
+fig-align="center" width="100%"}
+
+The coordinates for my bounding box which I have drawn manually with the
+cursor on the world map are written in the gray box on the left pane:
+Starting from the top clockwise: 71.5, 41.5, 34.31, -25.5 they represent
+latitude and longitude and can be used in the R code. (Before I could
+draw the bounding box I had to click the link under the gray bounding
+box in the left pane saying "Choose another area
+manually"[^91-creating-maps-1].)
+
+[^91-creating-maps-1]: or similar: The text in my page was in German:
+    "Einen anderen Bereich manuell auswählen".
+
+::: callout-note
+I didn't know how to get maps from continents, such as Europe, for a
+long time. It was relatively easy for Africa to sort by country names.
+However, this strategy did not work for Europe, where, for instance,
+France and Great Britain still have several overseas territories (see:
+[What is a
+country?](https://docs.ropensci.org/rnaturalearth/articles/what-is-a-country.html)).
+
+Now, I have learned that the trick is to zoom in and clip the relevant
+part of the world map downloaded via Natural Earth (see also [Making
+Maps in
+R](https://biostats-r.github.io/biostats/workingInR/140_maps.html),
+chapter 23 of the open source book "Working in R" [@soule-2024].
+:::
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-b-zoom-window}
+: Zooming into a area manually specified
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: zoom-window
+
+window_coord <- sf::st_sfc( 
+    sf::st_point(c(-24.5, 34.31)),  # left, bottom 
+    sf::st_point(c(41.5, 71.5)),    # right, top 
+    crs = 4326 # the EPSG identifier of WGS84 (used in GPS) 
+    ) 
+    
+window_coord_sf <- window_coord |>  
+    sf::st_transform(crs = target_crs) |>  
+    sf::st_coordinates() # retrieve coordinates
+```
+
+
+
+::::
+:::::
+
+
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-b-zoom-europe-map}
+: Show map of Europe (first version)
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: fig-zoom-europe-map
+#| fig-cap: "Rate of unemployment in Europe 2023, data source: World Bank"
+
+world_moll |>  
+    dplyr::left_join(df, by = c("adm0_a3" = "iso3c")) |> 
+    ggplot2::ggplot() + 
+    ggplot2::geom_sf(ggplot2::aes(fill = SL.UEM.TOTL.ZS)) + 
+
+    ## window of the map 
+    ggplot2::coord_sf(
+        xlim = window_coord_sf[, "X"], 
+        ylim = window_coord_sf[, "Y"], 
+        expand = FALSE 
+        ) +
+    
+    ggplot2::scale_fill_viridis_c(
+    trans = "sqrt", 
+    labels = scales::percent_format(scale = 1), 
+    breaks = c(1:5)^2
+    ) + 
+
+    ## fix labels not needed: https://stackoverflow.com/a/60733863 
+
+    ggplot2::theme_bw() + 
+    ggplot2::theme(
+        panel.background = ggplot2::element_rect(fill = "aliceblue"),
+        aspect.ratio = 3/4
+        ) + 
+    ggplot2::labs (
+        title = paste(unique(df$date), indicator_info$indicator), 
+        fill = NULL, 
+        caption = paste0("Source: ", 
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 1),
+            ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 2),
+             ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 3),
+            ". ",
+             stringr::str_split_i(indicator_info$source_org, "\\. ", -1)
+        )
+    )
+
+```
+***
+
+To get a graphic with more width I have changed the aspect ration slightly form 1 to `aspect.ratio = 3/4`.
+
+There are no data (`NA`) for the unemployment ratio available for Ukraine and Kosovo. These two countries are therefore colored grey.
+
+::::
+:::::
+
+## Changing scale and color distribution
+
+In the 2020 dataset used by the blog article I am referring here, there was the unemployment rate quite different. Especially the very low in Greenland and the very high in the African countries distorted the visual outcome. The extreme yellow and dark blue color with the highest and lowest percentage was not within the European countries.
+
+We will therefore remove the African countries and Greenland. We will also reduce our data to European countries only. So now the extreme yellow and dark blue color will be the highest and lowest percentage within the European countries. We will also remove the square root transformation (the square root transformation can be misleading for some audience).
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-annex-b-zoom-europe-map2}
+: Show map of Europe (second version)
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: fig-zoom-europe-map2
+#| fig-cap: "Rate of unemployment with 2023 European data only, data source: World Bank"
+
+world_moll_map <- world_moll |>  
+    dplyr::left_join(df, by = c("adm0_a3" = "iso3c")) |> 
+    dplyr::filter(continent == "Europe") |> 
+    ggplot2::ggplot() + 
+    ggplot2::geom_sf(ggplot2::aes(fill = SL.UEM.TOTL.ZS)) + 
+
+    ## window of the map 
+    ggplot2::coord_sf(
+        xlim = window_coord_sf[, "X"], 
+        ylim = window_coord_sf[, "Y"], 
+        expand = FALSE 
+        ) +
+    
+    ggplot2::scale_fill_viridis_c(
+    # trans = "sqrt", 
+    labels = scales::percent_format(scale = 1) #, 
+    # breaks = c(1:5)^2
+    ) + 
+
+    ## fix labels not needed: https://stackoverflow.com/a/60733863 
+
+    ggplot2::theme_bw() + 
+    ggplot2::theme(
+        panel.background = ggplot2::element_rect(fill = "aliceblue"),
+        aspect.ratio = 3/4
+        ) + 
+    ggplot2::labs (
+        title = paste(unique(df$date), indicator_info$indicator), 
+        fill = NULL, 
+        caption = paste0("Source: ", 
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 1),
+            ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 2),
+             ".\n",
+            stringr::str_split_i(indicator_info$source_org, "\\. ", 3),
+            ". ",
+             stringr::str_split_i(indicator_info$source_org, "\\. ", -1)
+        )
+    )
+
+world_moll_map
+```
+
+
+
+::::
+:::::
+
+The result surprised me. The graphic of the unemployment rate for Europe is now quite different. As the article by [@felixanalytix-2023] correctly wrote:
+
+> … we see here a comparison of unemployment between European countries only, while in the previous plot (@fig-zoom-europe-map in my article) we were using global data on unemployment. Spain and Baltic countries are popping up much more, while it was less the case when using a scale based on global world unemployment.
