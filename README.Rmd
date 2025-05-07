@@ -27,8 +27,10 @@ become explicit and explain all my learning outcomes more carefully.
 Please keep in mind that this text is not written by an expert but by a
 learner.
 
-My focus is on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. I have added some additional material/experiments as separate annex chapters.
 
 **This is work in progress: Finished about 11%.**
+
+My focus is on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. The percentage is therefore calculated by notes referring to the chapters 5 to 12 (184 pages). But I have added some additional material/experiments as separate annex chapters.
+
 
 
