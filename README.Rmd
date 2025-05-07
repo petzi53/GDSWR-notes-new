@@ -11,17 +11,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-# QUARTO TEMPLATE
+# Geographic Datascience with R (GDSWR)
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-**This is my template for Quarto books about personal notes by reading R books.**
-
-What follows is a template text, that has to be updated for every book.
-
 This Quarto book collects my personal notes, trials and exercises of
-[BOOKNAME](URL) by [AUTHOR].
+Wimberly, Michael C. (2023). Geographic Data Science With R: Visualizing and Analyzing Environmental Change (1st ed.). Chapman & Hall/CRC. The book is also [available online](https://bookdown.org/mcwimberly/gdswr-book/).
 
 WATCH OUT: This is my personal learning material and is therefore
 neither an accurate replication nor an authoritative textbook.
@@ -30,5 +26,9 @@ I wrote this book as a text for others to read because that forces me to
 become explicit and explain all my learning outcomes more carefully.
 Please keep in mind that this text is not written by an expert but by a
 learner.
+
+My focus is on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. I have added some additional material/experiments as separate annex chapters.
+
+**This is work in progress: Finished about 11%.**
 
 
