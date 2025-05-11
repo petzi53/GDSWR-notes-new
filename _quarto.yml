@@ -25,15 +25,15 @@ book:
   appendices:
     - 90-sf-load-save.qmd
     - 91-creating-maps.qmd
+    - 92-interactive-maps.qmd
     - 95-austrian-data.qmd
     - 98-packages-used.qmd
 
 
-bibliography:
-    - references.bib
+bibliography: references.bib
 reference-section-title: References
-# citeproc: true
-
+citeproc: true # default
+csl: apa.csl
 
 format:
   html:

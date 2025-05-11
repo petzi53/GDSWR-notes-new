@@ -1,10 +1,15 @@
+---
+nocite: |
+  @wimberly-2022, @wimberly-2023, @wimberly-2023a, @dyba-2024
+---
+
 # Preface {.unnumbered}
 
 ::: {.callout-note style="color: blue;"}
 ##### This is work in progress: Finished about 11%
 :::
 
-This Quarto book collects my personal notes, trials and exercises of  Geographic Data Science With R: Visualizing and Analyzing Environmental Change by Michael Wimberly [@wimberly-2023]. The book is also [available online](https://bookdown.org/mcwimberly/gdswr-book/).
+This Quarto book collects my personal notes, trials and exercises of  Geographic Data Science With R: Visualizing and Analyzing Environmental Change by Michael Wimberly [@wimberly-2023a]. The book is also [available online](https://bookdown.org/mcwimberly/gdswr-book/). The dataset that accompanies the book can be downloaded from [figshare](https://figshare.com/articles/dataset/Geographic_Data_Science_with_R/21301212/3).
 
 I have some experience with the R language but none working with geodata. I want to use maps to show how statistical results differ by country. My focus is therefore on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. I have added some additional material/experiments as separate annex chapters.
 
@@ -29,6 +34,10 @@ The book has twelve chapters with 267 pages (appendix and bibliography *not* inc
 
 ## Packages used in this chapter
 
+To refer to an R package I have used the format {**<package-name>**}, e.g., {**glossary**}. At the beginning of each file I have listed all packages used in the current chapter, as the next box demonstrates for this preface. 
+
+The package name is followed by the reference to the package author and a link to a short profile of the package that are collected in the annex (@sec-z-annex).
+
 :::::{.my-resource}
 :::{.my-resource-header}
 :::::: {#lem-resource-text}
@@ -37,7 +46,9 @@ The book has twelve chapters with 267 pages (appendix and bibliography *not* inc
 :::
 ::::{.my-resource-container}
 
-- {**glossary**}: [@glossary]
+- {**glossary**}: 
+  - Author: [@glossary]
+  - Package Profile: @sec-z-glossary
 
 ::::
 :::::
@@ -323,7 +334,7 @@ Resources I have drawn upon to learn how to develop skimmers for the `geometry`c
 
 
 
-## Glossary
+## Glossary table
 
 ```{r}
 #| label: glossary-table

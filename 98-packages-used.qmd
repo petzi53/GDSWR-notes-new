@@ -1,4 +1,4 @@
-# Packages used {#sec-annex-z}
+# Packages used {#sec-z-annex}
 
 ```{r}
 #| label: setup
@@ -8,7 +8,7 @@
 base::source(file = paste0(here::here(), "/R/helper.R"))
 ```
 
-## cowplot {#sec-cowplot}
+## cowplot {#sec-z-cowplot}
 
 :::::: my-package
 ::: my-package-header
@@ -28,7 +28,7 @@ The {**cowplot**} package provides various features that help with creating publ
 
 ------------------------------------------------------------------------
 
-There are several packages that can be used to align plots. The most widely used ones beside {**cowplot**} are {**egg**} and {**patchwork**} (see @sec-patchwork). All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
+There are several packages that can be used to align plots. The most widely used ones beside {**cowplot**} are {**egg**} and {**patchwork**} (see @sec-z-patchwork). All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
 
 Most importantly, while {**egg**} and {**patchwork**} align and arrange plots at the same time, {**cowplot**} aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.
 
@@ -36,7 +36,7 @@ The {**cowplot**} package now provides a set of complementary themes with differ
 ::::
 ::::::
 
-## dplyr {#sec-dplyr}
+## dplyr {#sec-z-dplyr}
 
 :::::: my-package
 ::: my-package-header
@@ -60,7 +60,7 @@ These all combine naturally with `group_by()` which allows you to perform any op
 ::::
 ::::::
 
-## forcats {#sec-forcats}
+## forcats {#sec-z-forcats}
 
 :::::: my-package
 ::: my-package-header
@@ -90,7 +90,7 @@ Package Profile: forcats
 ::::
 ::::::
 
-## ggplot2 {#sec-ggplot2}
+## ggplot2 {#sec-z-ggplot2}
 
 :::::: my-package
 ::: my-package-header
@@ -114,7 +114,7 @@ It’s hard to succinctly describe how {**ggplot2**} works because it embodies a
 ::::
 ::::::
 
-## glossary {#sec-glossary}
+## glossary {#sec-z-glossary}
 
 :::::: my-num-packagebox
 ::: my-num-packagebox-header
@@ -143,7 +143,7 @@ There is a lot of necessary jargon to learn for working with geospatial data. Th
 
 
 
-## glue {#sec-glue}
+## glue {#sec-z-glue}
 
 :::::: my-package
 ::: my-package-header
@@ -169,7 +169,7 @@ Glue offers interpreted string literals that are small, fast, and dependency-fre
 ::::
 ::::::
 
-## gridExtra {#sec-gridExtra}
+## gridExtra {#sec-z-gridExtra}
 
 ::::: my-package
 ::: my-package-header
@@ -192,7 +192,7 @@ The {**grid**) package (= part of the R system library) provides low-level funct
 :::
 :::::
 
-## gtable {#sec-gtable}
+## gtable {#sec-z-gtable}
 
 :::::: my-num-packagebox
 ::: my-num-packagebox-header
@@ -218,7 +218,7 @@ Tools to make it easier to work with "tables" of 'grobs'. The 'gtable' package d
 
 
 
-## patchwork {#sec-patchwork}
+## patchwork {#sec-z-patchwork}
 
 ::::::::::::: my-package
 ::: my-package-header
@@ -238,7 +238,7 @@ The goal of {**patchwork**} is to make it ridiculously simple to combine separat
 
 ------------------------------------------------------------------------
 
-The {**ggplot2**} package provides a strong API for sequentially building up a plot, but does not concern itself with composition of multiple plots. {**patchwork**} is a package that expands the API to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots. Other packages that try to address this need (but with a different approach) are {**gridExtra**} and {**cowplot**} (see @sec-gridExtra and @sec-cowplot).
+The {**ggplot2**} package provides a strong API for sequentially building up a plot, but does not concern itself with composition of multiple plots. {**patchwork**} is a package that expands the API to allow for arbitrarily complex composition of plots by, among others, providing mathematical operators for combining multiple plots. Other packages that try to address this need (but with a different approach) are {**gridExtra**} and {**cowplot**} (see @sec-z-gridExtra and @sec-z-cowplot).
 
 Before plots can be laid out, they have to be assembled. Arguably one of patchwork’s biggest selling points is that it expands on the use of `+` in ggplot2 to allow plots to be added together and composed, creating a natural extension of the {**ggplot2**} API.
 
@@ -250,7 +250,7 @@ While quite complex compositions can be achieved using `+`, `|`, and `/`, it may
 :::
 
 ::: my-remark-container
-In this book I am using the dobble colon notation instead of a `library()` call. Without this call it is more difficult to use the {**patchwork**} package.
+In this book I am using the double colon notation instead of a `library()` call. Without this call it is more difficult to use the {**patchwork**} package.
 
 See [Using plot arithmetic functions with `::` syntax](https://github.com/thomasp85/patchwork/issues/351#issuecomment-1931140157)
 
@@ -267,7 +267,7 @@ See [Using plot arithmetic functions with `::` syntax](https://github.com/thomas
 :::::::
 ::::::::
 
-## plotly {#sec-plotly}
+## plotly {#sec-z-plotly}
 
 :::::: my-package
 ::: my-package-header
@@ -293,8 +293,124 @@ Plotly.js can be used to produce dozens of chart types and visualizations, inclu
 ::::
 ::::::
 
+## rnaturalearth {#sec-z-rnaturalearth}
 
-## skimr {#sec-skimr}
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: rnaturalearth
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[World Map Data from Natural Earth](https://docs.ropensci.org/rnaturalearth/) [@rnaturalearth]</center>
+
+------------------------------------------------------------------------
+
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-ropensci-min.png){width="176"}
+
+Facilitates mapping by making natural earth map data from [https://www.naturalearthdata.com/](https://www.naturalearthdata.com/) more easily available to R users. One low resolution example file & data can be downloaded from [NaturalEarth](https://www.naturalearthdata.com/downloads/) using `rnaturalearth::ne_download()`. For low (scale 110) and medium resolution (scale 50) files you would need the {**rnaturalearthdata**} package (@sec-z-rnaturalearthdata). High resolution (scale 10) files are too large to be submitted to CRAN because its size exceeds CRAN recommendations. These data are only available at the [GitHub repo](https://github.com/ropensci/rnaturalearthhires). 
+:::
+
+------------------------------------------------------------------------
+
+This package provides :
+
+- access to a pre-downloaded subset of Natural Earth v4.1.0 (March 2018) vector data commonly used in world mapping
+- easy subsetting by countries and regions
+- functions to download other Natural Earth vector and raster data
+- a simple, reproducible and sustainable workflow from Natural Earth data to {**rnaturalearth**} enabling updating as new versions become available
+- clarification of differences in world maps classified by countries, sovereign states and map units
+- consistency with Natural Earth naming conventions so that {**rnaturalearth**} users can use Natural Earth documentation
+- data in sf or sv formats
+
+The Natural Earth website structures vector data by scale, category and type. These determine the filenames of downloads. {**rnaturalearth**} uses this structure to facilitate download (like an `r glossary("APIx", "API")`).
+::::
+::::::
+
+## rnaturalearthdata {#sec-z-rnaturalearthdata}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: Package 'rnaturalearthdata'
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[World Map Data from Natural Earth Used in 'naturalearth'](https://docs.ropensci.org/rnaturalearthdata/) [@rnaturalearthdata]</center>
+
+------------------------------------------------------------------------
+
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-ropensci-min.png){width="176"}
+
+Package holds low and medium resolution data used by {**rnaturalearth**}. Vector map data from [https://www.naturalearthdata.com/](https://www.naturalearthdata.com/). Access functions are provided in the accompanying package {**rnaturalearth**}. See @sec-z-rnaturalearth.
+
+:::
+
+------------------------------------------------------------------------
+
+
+::::
+::::::
+
+
+## s2 {#sec-z-s2}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: s2
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[Spherical Geometry Operators Using the S2 Geometry](https://r-spatial.github.io/s2/) [@s2]</center>
+
+------------------------------------------------------------------------
+
+<center>(*There is no hexagon sticker available for {**s2**}.*)</center>  
+
+Provides R bindings for [Google's s2 library](http://s2geometry.io/) for geometric calculations on the sphere. High-performance constructors and exporters provide high compatibility with existing spatial packages, transformers construct new geometries from existing geometries, predicates provide a means to select geometries based on spatial relationships, and accessors extract information about geometries.
+
+::::
+::::::
+
+
+## sf {#sec-z-sf}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: sf
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[Simple Features for R](https://r-spatial.github.io/sf/) [@sf]</center>
+
+------------------------------------------------------------------------
+
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-sf-min.png){width="176"}
+
+Support for simple feature access, a standardized way to encode and analyze spatial vector data. Binds to 'GDAL' [doi:10.5281/zenodo.5884351](doi:10.5281/zenodo.5884351) for reading and writing data, to 'GEOS' [doi:10.5281/zenodo.11396894](doi:10.5281/zenodo.11396894) for geometrical operations, and to 'PROJ' [doi:10.5281/zenodo.5884394](doi:10.5281/zenodo.5884394) for projection conversions and datum transformations. 
+Uses by default the {**s2**} package for geometry operations on geodetic (long/lat degree) coordinates.
+:::
+
+------------------------------------------------------------------------
+
+The above description may sound cryptic, but I will not explain it here. This whole note-book is dedicated to learn the various features of the {**sf**} package and to use it appropriately.
+::::
+::::::
+
+
+## skimr {#sec-z-skimr}
 
 ::::::::: my-package
 ::: my-package-header
@@ -328,7 +444,95 @@ At the moment I am just using the `skimr::skim()` function. I believe most of th
 :::::::
 :::::::::
 
-## tidyverse {#sec-tidyverse}
+## sp {#sec-z-sp}
+
+:::::: my-num-packagebox
+::: my-num-packagebox-header
+Package Profile: sp
+:::
+
+------------------------------------------------------------------------
+
+:::: my-num-packagebox-container
+<center>[Classes and Methods for Spatial Data](https://edzer.github.io/sp/) [@sp]</center>
+
+------------------------------------------------------------------------
+
+<center>(*There is no hexagon sticker available for {sp}.*)</center>  
+
+Classes and methods for spatial data; the classes document where the spatial location information resides, for 2D or 3D data. Utility functions are provided, e.g. for plotting data as maps, spatial selection, as well as methods for retrieving coordinates, for subsetting, print, summary, etc. From this version, 'rgdal', 'maptools', and 'rgeos' are no longer used at all, see [sp evolution status](https://r-spatial.org/r/2023/05/15/evolution4.html) for details.
+
+------------------------------------------------------------------------
+:::::{.my-remark}
+:::{.my-remark-header}
+{**sp**}: use **sf** instead of **rgdal**, **rgeos** and **maptools**
+:::
+::::{.my-remark-container}
+
+Since October 2023 is the [state of transition process](https://r-spatial.org/r/2023/05/15/evolution4.html) from **sp** to **sf** finished. In new R code and dataset you should not be bothered anymore with the {**sp**} package.
+
+::::
+:::::
+
+::::
+::::::
+
+
+
+## tidyr {#sec-z-tidyr}
+
+:::::: my-package
+::: my-package-header
+Package Profile: tidyr
+:::
+
+:::: my-package-container
+<center>[Tidy Messy Data](https://tidyr.tidyverse.org/) [@tidyr]</center>
+
+------------------------------------------------------------------------
+
+::: {layout="[10, 30]" layout-valign="center"}
+![](img/logoi/logo-tidyr-min.png){width="176"}
+
+The goal of {**tidyr**} is to help you create tidy data. Tidy data describes a standard way of storing data that is used wherever possible throughout the {**tidyverse**}. If you ensure that your data is tidy, you’ll spend less time fighting with the tools and more time working on your analysis.
+:::
+
+------------------------------------------------------------------------
+
+Tidy data is data where: - Every column is a variable. - Every row is an observation. - Every cell is a single value.
+::::
+::::::
+
+## tidyselect {#sec-z-tidyselect}
+
+::::: my-package
+::: my-package-header
+Package Profile: tidyselect
+:::
+
+::: my-package-container
+
+------------------------------------------------------------------------
+
+<center>[Select from a Set of Strings](https://tidyselect.r-lib.org/index.html) [@tidyselect]</center>
+
+------------------------------------------------------------------------
+
+(*There is no hexagon sticker available for {**tidyselect**}.*)
+
+The {**tidyselect**} package is the backend of functions like `dplyr::select()` or `dplyr::pull()` as well as several {**tidyr**} verbs. It allows you to create selecting verbs that are consistent with other {**tidyverse**} packages.
+
+To learn about the selection syntax as a user of {**dplyr**} or {**tidyr**}, read the user-friendly [?language](https://tidyselect.r-lib.org/reference/language.html) reference.
+
+To learn how to implement tidyselect in your own functions, read [vignette("tidyselect")](https://tidyselect.r-lib.org/articles/tidyselect.html).
+
+To learn exactly how the {**tidyselect**} syntax is interpreted, read the technical description in [vignette("syntax")](https://tidyselect.r-lib.org/articles/syntax.html).
+:::
+:::::
+
+
+
+## tidyverse {#sec-z-tidyverse}
 
 ::::::::: my-package
 ::: my-package-header

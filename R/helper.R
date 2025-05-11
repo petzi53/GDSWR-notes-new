@@ -5,6 +5,7 @@
 # CONTENT:
 ## - load {glossary} and provide path to my glossary.yml
 ## - my_create_folder: create folder if not exists already
+## - get_skimmers.sfc: skimmer for geometry column class
 ## - my_glance_data: glance at a specified number of random data
 ## - my_qq_plot: create histogram with overlaid dnorm curve
 ## - my_scatter: create scatterplot with lm and loess curve

@@ -36,7 +36,8 @@ Chapter section list
 
 ::: {.my-objectives-container}
 
-1. Import geospatial data: @sec-05-import-geodata
+1. Introduction to the {**sf**} package @sec-05-intro-sf
+1. Import geospatial data: @sec-05-esri-shapefile
 2. Creating simple maps: @sec-05-create-maps
 3. Overlaying vector datasets: @sec-05-overlaying-vector-datasets
 4. Save spatial geodata files: @sec-05-save-geodata
@@ -52,76 +53,68 @@ Chapter section list
 ::::
 :::::
 
-## Import Geospatial Data {#sec-05-import-geodata}
+## Introduction to {**sf**} {#sec-05-intro-sf}
 
-### ESRI shapefile format
+The following text are taken quit literally from the textbook, p. 83.
 
-The data for import in Chapter 5 of the book are provided in `r glossary("ESRI")` shapefile format. This format was developed several decades ago but remains a widely used file format for vector geospatial data. It is a multiple file format, where separate files contain the feature geometries, attribute table, spatial indices, and coordinate reference system.
+Vector data consists of **features** that represent geographic phenomena. 
+
+  - **Points** can be used to represent small objects such as wells, weather stations, or field plot locations. 
+  - **Lines** represent one-dimensional linear features such as roads and streams. 
+  - **Polygons** represent two-dimensional natural features such as lakes, vegetation patches, and burn scars as well as administrative units such as counties, districts, and counties. 
+    
+The type of geometry used to represent a particular feature may depend on the scale of the measurement. Points can be used to represent city locations at a continental scale, whereas a polygon would be used to map the boundary of an individual city.
+
+Each feature in a vector dataset is described by a set of spatial coordinates and one or more attributes that characterize the feature. For example, a vector dataset of forest stands would include the vertices of each stand boundary polygon as well an attribute table containing variables such as stand age, tree species abundances, and timber volume for each stand. 
+
+This book uses the {**sf**} package, developed by @sf to work with vector datasets as “simple features” in R. (See: @sec-z-sf) This approach uses data frame objects to store vector data. Each feature is represented by one row in the data frame, with attributes stored as columns and spatial information stored in a special geometry column. This means that we can use all the **tidyverse** package to use function from {**dplyr**} and {**tidyr**} (@sec-z-dplyr, @sec-z-tidyr).
+
+The {**ggplot2**} (@sec-z-ggplot2) package can also be used to generate maps from data frames containing geospatial data with the `ggplot2::geom_sf()` function.
+
+In the R package {**sf**} (Simple Features), many functions are prefixed with `st_`. The `st_` prefix is inspired by [PostGIS](https://postgis.net/), and refers with the abbreviation to “**s**patial **t**ype”. This prefix is used consistently throughout {**sf**} to indicate that a function operates on spatial data. In the context of {**sf**}, `st_` serves as a namespace for spatial functions, allowing developers and users to easily identify and find functions related to spatial operations. This prefixing convention makes it simple to discover and use spatial functions.
+
+
+## ESRI Shapefile Format {#sec-05-esri-shapefile}
+
+### Import Shapefile Geodata {#sec-05-import-shapefile-geodata}
+
+::: {.callout-note #nte-additional-info}
+###### Additional info in annex A
+
+For this section I am going to use additional information provided by [How to load and save vector data in R](https://r-spatial.org/r/2024/06/26/sf-load-save.html). This weblog article in [r-spatial](https://r-spatial.org/) provides information not only about shapefiles (`.shp`) but also to the more modern geodata formats of geopackage (`.gpkg`) and geoJSON (`.geojson`).
+
+I will summarize the r-spatial blog article in @sec-annex-a.
+:::
+
+
+The data for import in Chapter 5 of the book are provided in `r glossary("ESRI")` shapefile format. This format was developed several decades ago but remains a widely used file format for vector geospatial data. It is a multiple file format, consists of several files (e.g., `.shp`, `.shx`, `.dbf`, `.prj`). These different files contain information about the features of geometries, attribute table, spatial indices, and coordinate reference system. 
+
+To read in the geodata, it is only necessary to specify the file name in the `sf::st_read()` function with the `.shp` extension. However, all files (`.shp` file as well as the `.dbf`, `.shx`, and `.prj` files), need to be present in the same directory from which the data are read.
 
 :::::{.my-r-code}
 :::{.my-r-code-header}
-:::::: {#cnj-import-ESRI-data}
+:::::: {#cnj-05-import-ESRI-data}
 : Import ESRI Data
 ::::::
 :::
 ::::{.my-r-code-container}
 ```{r}
-#| label: code-chunk-name
+#| label: import-esri-data
 
-1 + 1
+okcounty <- sf::st_read("data/Chapter5/ok_counties.shp")
 ```
 
 ::::
 :::::
 
+`sf::st_read()` is a function with several parameters. Here I have just used the minimal invocation of the function, relying on the provided default values.
 
-:::::{.my-r-code}
-:::{.my-r-code-header}
-:::::: {#cnj-05-import-geospatial-data}
-: Import Geospatial Data
-::::::
-:::
-::::{.my-r-code-container}
-```{r}
-#| label: import-geospatial-data
-#| results: markup
+The function prints out general information about the data except when added the parameter `quiet = TRUE`, which I will use preferentially in later function calls.
 
+There are two important issues connected with ESRI data:
 
-
-glue::glue("############### import esri data using sf::st_read() #############")
-okcounty <- sf::st_read("data/Chapter5/ok_counties.shp", quiet = TRUE)
-tpoint <- sf::st_read("data/Chapter5/ok_tornado_point.shp", quiet = TRUE)
-tpath <- sf::st_read("data/Chapter5/ok_tornado_path.shp", quiet = TRUE)
-
-glue::glue("")
-glue::glue("############### show df data class #############")
-class(okcounty)
-
-glue::glue("")
-glue::glue("############### show df$geometry data class #############")
-class(okcounty$geometry)
-
-glue::glue("")
-glue::glue("############### show data with dplyr #############")
-dplyr::glimpse(okcounty)
-
-glue::glue("")
-glue::glue("############### show skim types #############")
-skimr::skim(okcounty)
-```
-
-
-***
-
-{**sf**} objects contain a special column called `geometry` that contains the geospatial information about the location of each feature. This column should not be modified directly because it is used by functions in the {**sf**} package for geospatial data processing.
-
-::::
-:::::
-
-::: {.callout-note #nte-05-skimr}
-###### Using {skimr} with {sf}
-
-Normally I am using the `skimr::skim()` function for data summary. But for the {**sf**} data classes in the `geometry` column are no skimmers available. Possible data types are (`sfc` stands for "simple feature list column".):
+1. Checking `class(okcounty)` results in "*`r class(okcounty)`*". With the parameter `as_tibble = TRUE` one would get *"sf, tbl_df, tbl, data.frame"*.
+2. Special importance has the spatial information per default located in the column named `geometry`. `class(okcounty$geometry)` returns in our case "*`r class(okcounty$geometry)`*". But this result is just one outcome that depends of the actual data stored in `geometry` that could have seven different data classes: 
 
  - sfc_POINT, 
  - sfc_LINESTRING, 
@@ -131,36 +124,87 @@ Normally I am using the `skimr::skim()` function for data summary. But for the {
  - sfc_MULTIPOLYGON, and 
  - sfc_GEOMETRY. 
  
-In the above case the `class(okcounty$geometry)` = "*`r class(okcounty$geometry)`*" and not user-defined for {**skimr**} The fall back to the "character" class is not useful. (`sfc` stands for "simple feature list column".)
+ `sfc` stands for "**s**imple **f**eature (list) **c**olumn"
+ 
+::: {.callout-warning #wrn-attention-geometry}
+###### Do not mess directly with the geometry column
 
-It is possible to adapt {**skimr**} for working with user defined data types using `skimr::skim_with()`. Resources that explain how to do this are:
-
-- [Defining sfl’s for a package](https://docs.ropensci.org/skimr/articles/extending_skimr.html#defining-sfls-for-a-package): General article that explains how to generate and use with user defined data types. `sfl`stands for "skimr function list". It is a list-like data structure used to define custom summary statistics for specific data types.
-- [skim of {**sf**} objects](https://github.com/ropensci/skimr/issues/88): Discussion specific to the {**sf**} package.
-
-At the moment I do not understand enough about the {**sf**} package to get into more details for writing an appropriate function. I wonder if there is not already a solution available as spatial data processing with R and the {**sf**} package is not an extremely rare use case.
+{**sf**} objects contain a special column called `geometry` that contains the geospatial information about the location of each feature. This column should not be modified directly because it is used by functions in the {**sf**} package for geospatial data processing.
 :::
 
+### Inspect Geospatial Data
+
+::: {.my-code-collection}
+:::: {.my-code-collection-header}
+::::: {.my-code-collection-icon}
+:::::
+:::::: {#exm-05-inspect-geospatial-data}
+: Inspect geospatial data
+::::::
+
+::::
+
+::::{.my-code-collection-container}
+
+::: {.panel-tabset}
+
+###### glimpse
+
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-05-glimpse-geospatial-data}
+: Glimpse at the data
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: glimpse-geospatial-data
+
+dplyr::glimpse(okcounty)
+```
+
+***
+
+The `ok_counties.shp` dataset contains county boundaries for the state of  Oklahoma.
+
+I am not interested here in the details of the dataset. The important point here is that the last column `geometry` contains the geospatial information. 
+::::
+:::::
 
 
+###### skim
 
-In the R package {**sf**} (Simple Features), many functions are prefixed with `st_`. The `st_` prefix is inspired by [PostGIS](https://postgis.net/), which refers with the abbreviation to “spatial type”. This prefix is used consistently throughout {**sf**} to indicate that a function operates on spatial data. In the context of {**sf**}, `st_` serves as a namespace for spatial functions, allowing developers and users to easily identify and find functions related to spatial operations. This prefixing convention makes it simple to discover and use spatial functions.
+:::::{.my-r-code}
+:::{.my-r-code-header}
+:::::: {#cnj-05-skim-geospatial-data}
+: Skim geospatial data
+::::::
+:::
+::::{.my-r-code-container}
+```{r}
+#| label: skim-geospatial-data
 
-Looking at the file names I noticed: All files have the same filename with different extensions. There are always four files with the extensions `.dbf`, `.prj`, `.shp`, `.shx`. 
+skimr::skim(okcounty)
+```
+***
 
-The shapefiles are imported to {**sf**} objects using the `sf::st_read()` function. The `quiet = TRUE` argument suppresses output to the console when importing spatial datasets. It 
+the `class(okcounty$geometry)` = "*`r class(okcounty$geometry)`*" is in the default version of {**skimr**} not user-defined and the fall back to the "character" class is not useful. I therefore had to adapt {**skimr**} for working with the class `sfc` which is common to all seven different class types for the geometry column. Resources that explain how to do this are:
 
-An example for the output when using `quit = FALSE` (the default option) is:
+- [Defining sfl’s for a package](https://docs.ropensci.org/skimr/articles/extending_skimr.html#defining-sfls-for-a-package): General article that explains how to generate and use with user defined data types. `sfl` stands for "skimr function list". It is a list-like data structure used to define custom summary statistics for specific data types.
+- [skim of {**sf**} objects](https://github.com/ropensci/skimr/issues/88): Discussion specific skimmers for to the {**sf**} package.
 
-> Reading layer `ok_counties' from data source 
-  `/Users/petzi/Documents/Meine-Repos/GDSWR/data/Chapter5/ok_counties.shp' using driver `ESRI Shapefile'  
-Simple feature collection with 77 features and 7 fields  
-Geometry type: POLYGON  
-Dimension:     XY  
-Bounding box:  xmin: -103.0025 ymin: 33.62184 xmax: -94.43151 ymax: 37.00163  
-Geodetic CRS:  NAD83
+Inspect the code I have used in the "R/helper.R" file.
 
-To read in a shapefile, it is only necessary to specify the filename with a `.shp` extension. However, all the files, including the `.shp` file as well as the `.dbf`, `.shx`, and `.prj` files, need to be present in the directory from which the data are read.
+
+::::
+:::::
+
+:::
+
+::::
+:::::
+
+
 
 - The `ok_counties.shp` dataset contains county boundaries for the state of  Oklahoma. 
 - The `ok_tornado_point.shp` dataset and the `ok_tornado_path.shp`  dataset contain historical information about tornadoes in Oklahoma. 
@@ -169,6 +213,10 @@ To read in a shapefile, it is only necessary to specify the filename with a `.sh
 - These data were derived from larger, national-level datasets generated by the National Oceanographic and Atmospheric Administration (NOAA) [National Weather Service Storm Prediction Center](https://www.spc.noaa.gov/gis/svrgis/).
 
 ### Conversion data sf <-> sp
+
+An older package that is still frequently used for working with geospatial data in R is {**sp**} (@sp, see: @sec-z-sp). This package has been around for much longer than {**sf**}, and there are a number of other R packages that work with geospatial data objects defined in {**sp**}. Therefore, it is sometimes necessary to convert geospatial data between these two object classes. The following examples show how to convert `okcounty` into an {**sp**} `SpatialPolygonsDataFrame` object and then back to an {**sf**} object.
+
+
 
 :::::{.my-r-code}
 :::{.my-r-code-header}
@@ -194,6 +242,7 @@ class(okcounty_sf)
 ::::
 :::::
 
+Note the conversion process in both direction is done with the {**sf**} package. You shouldn't need the {**sp**} package anymore. {**sf**} is in [maintenance mode](https://edzer.github.io/sp/), and currently requires sf for coordinate reference system validation and coordinate transformation, conversion and (re)projection.
 
 
 
@@ -291,7 +340,7 @@ As you can see from both graphics there is ample space aorund the map. I do not 
 
 ### Inspect `tpoint` and `tpath`
 
-Because {**sf**} objects are a type of data frame, they can be modified using the normal {**tidyverse**} functions. Let's look at the two other R objects we've generated in @cnj-05-import-geospatial-data.
+Because {**sf**} objects are a type of data frame, they can be modified using the normal {**tidyverse**} functions. 
 
 ::: {.my-code-collection}
 :::: {.my-code-collection-header}
@@ -319,6 +368,7 @@ Because {**sf**} objects are a type of data frame, they can be modified using th
 ```{r}
 #| label: glimpse-tpoint
 
+tpoint <- sf::st_read("data/Chapter5/ok_tornado_point.shp", quiet = TRUE)
 dplyr::glimpse(tpoint)
 ```
 
@@ -342,6 +392,7 @@ The points are the initial locations of tornado touchdowns.
 ```{r}
 #| label: glimpse-tpath
 
+tpath <- sf::st_read("data/Chapter5/ok_tornado_path.shp", quiet = TRUE)
 dplyr::glimpse(tpath)
 ```
 

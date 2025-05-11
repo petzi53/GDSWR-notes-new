@@ -39,17 +39,17 @@ Packages used in this article
 ::: my-resource-container
 Besides packages from the {**tidyverse**} the article uses
 
--   the {**rnaturalearth**} R package to download raw data from the
+-   the {**rnaturalearth**} R package  to download raw data from the
     Natural Earth Project,
--   the library {**sf**} to work with simple features in R,
--   and the library {**wbstats**} for the World Bank API.
+-   the {**sf**} package to work with simple features in R,
+-   and the {**wbstats**} package for the World Bank `r glossary("APIx", "API")`.
 :::
 :::::
 
 ## Download world data
 
 For downloading world data for the map, we will call the
-rnaturalearth::ne_countries() function with scale as “medium” (we don’t
+`rnaturalearth::ne_countries()` function with scale as “medium” (we don’t
 need detailed geographic data) and the returnclass will be “sf” (we want
 an sf object to work with the {**sf**} package).
 
@@ -143,11 +143,11 @@ generated with the `wbstats::wb_cachelist()` function. We will filter
 this indicator using again the `dplyr::filter()` function.
 
 For the most recent information on available data from the World Bank
-API wbstats::wb_cache() downloads an updated version of the information
-stored in wb_cachelist. wb_cachelist is simply a saved return of
-wb_cache(lang = "en"). To use this updated information in wb_search() or
-wb_data(), set the cache parameter to the saved list returned from
-wb_cache(). It is always a good idea to use this updated information to
+API `wbstats::wb_cache()` downloads an updated version of the information
+stored in `wbstats::wb_cachelist()`. `wbstats::wb_cachelist()` is simply a saved return of
+`wbstats::wb_cache(lang = "en")`. To use this updated information in `wbstats::wb_search()` or
+`wbstats::wb_data()`, set the cache parameter to the saved list returned from
+`wbstats::wb_cache()`. It is always a good idea to use this updated information to
 insure that you have access to the latest available information, such as
 newly added indicators or data sources.
 
@@ -160,7 +160,7 @@ Download "Unemployment" indicator
 To download data you need to follow several steps:
 
 1.  Instead of using the information stored in `wbstats::wb_cachelist()`
-    update data with `wbstats::wb_cache()`
+    it is better to update data with `wbstats::wb_cache()`
 2.  Use `wbstats::wb_search()` to find the parameter(s) for the
     indicator(s) your are looking for.
 3.  Filter the search results to keep only the indicator(s) you are
@@ -244,21 +244,21 @@ utils::str(wbstats::wb_cachelist, max.level = 1)
 ------------------------------------------------------------------------
 
 There are some notable differences in my datasets between the release of
-the {**wbstats**} package (2020-12-04) and my update four year later
-(2024-12-31):
+the {**wbstats**} package (2020-12-04) and my update four and half year later
+(2025-05-09):
 
 -   The number of countries and regions is in the updated version
     smaller than in the `wbstats::wb_cachelist` version.
 -   The numbers of indicators has in the updated list risen from 16,649
-    to 23,678.
--   The number of sources has increased slightly from 63 to 69.
+    to 25,257.
+-   The number of sources has increased slightly from 63 to 70.
 -   The other four data frames didn't change.
 
 ::: callout-note
 The numbers are the result of the differences. For instance the
 difference of four regions is the result of two more regions in the
-updates version ("Africa Eastern and Southern" and "Africa Western and
-Central") contra six less regions ("Andean Region", "Latin America and
+updated version ("Africa Eastern and Southern" and "Africa Western and
+Central") versus six less regions ("Andean Region", "Latin America and
 the Caribbean", "Central America", "Non-resource rich Sub-Saharan Africa
 countries, of which landlocked", "Resource rich Sub-Saharan Africa
 countries, of which oil exporters", "Southern Cone")
@@ -271,7 +271,7 @@ number of eight rows. But behind these eight rows lurk 64 mismatches.
 
 The four data frames with the same number of rows ("topics",
 "income_levels", "lending_types", "languages) are not the result of
-different mismachtes. These four tibbles are actually identical.
+different mismatches. These four tibbles are actually identical.
 :::
 ::::
 :::::::
@@ -410,8 +410,8 @@ if (file.exists(file_to_check)) {
 
 df <- wbstats::wb_data(
     indicator = ind,
-    start_date = 2023,
-    end_date = 2023,
+    start_date = 2024,
+    end_date = 2024,
     cache = my_cache
     )
 
@@ -421,7 +421,7 @@ dplyr::glimpse(df)
 ------------------------------------------------------------------------
 
 Looking at <https://data.worldbank.org/indicator/SL.UEM.TOTL.ZS>, I
-learned the latest data are from 2023.
+learned the latest data today (2025-05-09) are from 2024.
 :::
 ::::::
 :::::::::::::::::::::::::::::
@@ -536,15 +536,15 @@ transformation to see more clearly the percentage differences.
 
 :::::: my-r-code
 :::: my-r-code-header
-::: {#cnj-annex-b-world-map-2023}
-: Unemployment rate in 2023
+::: {#cnj-annex-b-world-map-2024}
+: Unemployment rate in 2024
 :::
 ::::
 
 ::: my-r-code-container
 ```{r}
 #| label: fig-world-map-2023
-#| fig-cap: "World map of 2023 unemployment, data source: World Bank"
+#| fig-cap: "World map of 2024 unemployment, data source: World Bank"
 
 world_moll |>  
     dplyr::left_join(df, by = c("adm0_a3" = "iso3c")) |> 
