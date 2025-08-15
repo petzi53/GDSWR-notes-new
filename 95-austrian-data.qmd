@@ -1,4 +1,4 @@
-# Working with Austrian data {#sec-annex-c}
+# Working with Austrian data {#sec-annex-d}
 
 
 ```{r}
@@ -12,38 +12,51 @@ options(show.signif.stars = FALSE)
 
 ```
 
-## Table of content for chapter 04 {.unnumbered}
 
-::::: {#obj-chap03}
+::::: {#obj-annex-d}
 :::: {.my-objectives}
 ::: {.my-objectives-header}
-Chapter section list
+Objectives
 :::
 
 ::: {.my-objectives-container}
 
-
+This chapter tries to find and to apply Austrian data for map plotting.
 
 :::
 ::::
 :::::
 
+::: {.callout-warning #wrn-annex-d-austrian-data}
+I can't remember from where I got the following Austrian data. Month later I tried to find the original source and learned about the following websites:
+
+- [Gliederung Österreichs in Gemeinden](https://data.statistik.gv.at/web/meta.jsp?dataset=OGDEXT_GEM_1)
+- [Update 2017 der Gemeindegrenzen](https://wahlen.strategieanalysen.at/geojson/)
+- [Verwaltungsgrenzen Österreich](https://www.opendataportal.at/katalog/dataset/geojson-daten-osterreich) (GeoJSON, TopoJSON)
+- [Download Austria Shapefiles](https://www.igismap.com/download-austria-shapefile-administrative-boundary-polygon-rail-road-line-ferry-airpoint-point/)
+- [Austrian OGD basemap](https://basemap.at/en/)
+- [Free Austria GIS Map files](https://simplemaps.com/gis/country/at#admin1) from [simplemaps](https://simplemaps.com/) 
+
+***
+
+The [Austrian Map](https://maps.bev.gv.at/#/center/13.35,47.7702/zoom/8) is an interesting website with all Austrian geographical and historical details. 
+:::
 
 :::::{.my-r-code}
 :::{.my-r-code-header}
-:::::: {#cnj-ID-text}
-: Numbered R Code Title
+:::::: {#cnj-annex-d-load-regions}
+: Load data for Austrian regions
 ::::::
 :::
 ::::{.my-r-code-container}
-::: {#lst-chaplisting-ID}
+::: {#lst-annex-d-load-regions}
 ```{r}
-#| label: code-chunk-name
+#| label: annex-d-load-regions
 
 at_regions <- sf::st_read("_archive/austria/austria-with-regions_.geojson")
 ```
 
-Listing title
+Load data for Austrian regions
 :::
 
 ::::
@@ -51,20 +64,20 @@ Listing title
 
 :::::{.my-r-code}
 :::{.my-r-code-header}
-:::::: {#cnj-ID-text}
-: Numbered R Code Title
+:::::: {#cnj-annex-d-plot-regions}
+: Plot Austrian regions 
 ::::::
 :::
 ::::{.my-r-code-container}
-::: {#lst-chaplisting-ID}
+::: {#lst-annex-d-plot-regions}
 ```{r}
-#| label: code-chunk-name2
+#| label: annex-d-plot-regions
 
 ggplot2::ggplot(data = at_regions) +  
   ggplot2::geom_sf(fill = NA)
 ```
 
-Listing title
+Austrian regions 
 :::
 
 ::::
@@ -72,14 +85,14 @@ Listing title
 
 :::::{.my-r-code}
 :::{.my-r-code-header}
-:::::: {#cnj-ID-text}
-: Numbered R Code Title
+:::::: {#cnj-annex-d-austrian-regions-with-admin-borders}
+: Load Austrian regions with administrative borders
 ::::::
 :::
 ::::{.my-r-code-container}
-::: {#lst-chaplisting-ID}
+::: {#lst-annex-d-austrian-regions-with-admin-borders}
 ```{r}
-#| label: code-chunk-name3
+#| label: annex-d-austrian-regions-with-admin-borders
 #| cache: TRUE
 
 at_folder = "_archive/austria"
@@ -94,7 +107,7 @@ ggplot2::ggplot(data = at_pol_bezirk) +
   ggplot2::geom_sf(fill = NA)
 ```
 
-Listing title
+Austrian regions with administrative borders
 :::
 
 ::::

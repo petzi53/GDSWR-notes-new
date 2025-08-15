@@ -1555,8 +1555,8 @@ The `cowplot::plot_grid()` function provides a variety of options for arranging 
 :::
 ::::{.my-resource-container}
 
-- A variety of additional resources for working with the sf package can be found at https://r-spatial.github.io/sf/index.html. These include a link to the sf “cheatsheet” as well as a variety of articles, vignettes, and blog posts that provide additional examples of how to work with vector geospatial data using this package. 
-  - A rather comrehensive overview about loading and saving  datasets of different formats is explained in the blog article [How to load and save vector data in R](https://r-spatial.org/r/2024/06/26/sf-load-save.html). I will follow the tutorial in this article in @sec-annex-a.
+- A variety of additional resources for working with the sf package can be found at <https://r-spatial.github.io/sf/index.html>. These include a link to the {**sf**} “cheatsheet” as well as a variety of articles, vignettes, and blog posts that provide additional examples of how to work with vector geospatial data using this package. 
+- A rather comprehensive overview about loading and saving  datasets of different formats is explained in the blog article [How to load and save vector data in R](https://r-spatial.org/r/2024/06/26/sf-load-save.html). I will follow the tutorial in this article in @sec-annex-a.
 - The book Geocomputation with R by Robin Lovelace and others [@lovelace-2020] is also an excellent reference that encompasses {**sf**} as well as many other R packages for working with geospatial data. Look for their forthcoming second edition [@lovelace-2025], which is already [online](https://r.geocompx.org/) for the most up-to-date information on geospatial data processing with R.
 - A more pressing knowledge for me is to learn how to get vector map data for creating maps. I am following here the tutorial by [@felixanalytix-2023] in @sec-annex-b.
 

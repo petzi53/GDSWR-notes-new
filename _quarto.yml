@@ -8,8 +8,8 @@ book:
   date: last-modified
   date-format: YYYY-MM-DD HH:mm
   favicon: "img/favicon_io/apple-touch-icon.png"
-  site-url: https://bookdown.org/pbaumgartner/gdswr-notes
-  repo-url: https://github.com/petzi53/GDSWR-notes
+  site-url: https://bookdown.org/pbaumgartner/gdswr-notes-new
+  repo-url: https://github.com/petzi53/GDSWR-notes-new
   repo-branch: master
   repo-actions: [edit, issue]
   page-navigation: true

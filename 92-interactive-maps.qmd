@@ -19,24 +19,23 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 ```
 
-## Table of content for chapter 04 {.unnumbered}
 
 ::::: {#obj-chap03}
 :::: {.my-objectives}
 ::: {.my-objectives-header}
-Chapter section list
+Objectives
 :::
 
 ::: {.my-objectives-container}
 
-
+In this section I am trying to generate interactive maps with the help of the {**plotly**} package. I will follow the article [Choropleth Maps in R](https://plotly.com/r/choropleth-maps/) from the plotly website.
 
 :::
 ::::
 :::::
 
 
-In this section I am trying to generate interactive maps with the help of the {**plotly**} package. I will follow the article [Choropleth Maps in R](https://plotly.com/r/choropleth-maps/) from the plotly website.
+
 
 ## Main parameters
 

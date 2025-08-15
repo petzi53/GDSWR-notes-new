@@ -19,17 +19,16 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 ```
 
-## Table of content for chapter 04 {.unnumbered}
 
 ::::: {#obj-annex-a}
 :::: {.my-objectives}
 ::: {.my-objectives-header}
-Chapter section list
+Objectives
 :::
 
 ::: {.my-objectives-container}
 
-
+A much more complete overview about loading and saving  datasets of different formats is explained in [How to load and save vector data in R](https://r-spatial.org/r/2024/06/26/sf-load-save.html), a weblog article in [r-spatial](https://r-spatial.org/). I will follow the tutorial in this article and comment it in difference to the GDSWR book.
 
 :::
 ::::
@@ -37,7 +36,7 @@ Chapter section list
 
 
 
-A much more complete overview about loading and saving  datasets of different formats is explained in [How to load and save vector data in R](https://r-spatial.org/r/2024/06/26/sf-load-save.html), a weblog article in [r-spatial](https://r-spatial.org/). I will follow the tutorial in this article and comment it in difference to the GDSWR book.
+
 
 ## Getting data
 

@@ -11,7 +11,23 @@ nocite: |
 
 This Quarto book collects my personal notes, trials and exercises of  Geographic Data Science With R: Visualizing and Analyzing Environmental Change by Michael Wimberly [@wimberly-2023a]. The book is also [available online](https://bookdown.org/mcwimberly/gdswr-book/). The dataset that accompanies the book can be downloaded from [figshare](https://figshare.com/articles/dataset/Geographic_Data_Science_with_R/21301212/3).
 
-I have some experience with the R language but none working with geodata. I want to use maps to show how statistical results differ by country. My focus is therefore on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. I have added some additional material/experiments as separate annex chapters.
+I have some experience with the R language but none working with geodata. I want to use maps to show how statistical results differ by country. My focus is therefore on geodata, e.g., I have skipped chapters 1-4 because I am already familiar with their content of introducing R. 
+
+::: {.callout-note}
+##### Additional tutorials 
+
+I have added some additional material/experiments as separate annex chapters. This were important steps in my learning venture:
+
+- @sec-annex-a
+- @sec-annex-b
+- @sec-annex-c
+- @sec-annex-d
+
+:::
+
+
+
+I have added some additional material/experiments as separate annex chapters.
 
 The book has twelve chapters with 267 pages (appendix and bibliography *not* included.) I skipped Chapter 1 to 4 (83 pages) because I am already familiar with their topics. The percentage is therefore calculated by notes referring to the chapters 5 to 12 (184 pages).
 
